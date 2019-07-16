@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="1.进程的终止方式根据《Unix高级系统环境》中的介绍，进程有5种正常终止方式：1、main函数种执行return语句。2、调用exit函数，他只终止运行程序和IO，不终止子进程。3、进程中的最后的一个线程执行return语句4、调用_exit或者_Exit函数。5、进程的最后一个线程调用pthread_exit函数。 3种异常终止方式：1、调用了abort，产生SIGABRT信号2、当进程收到某">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/06/29/hello-world/index.html">
+<meta property="og:title" content="Linux进程的终止">
+<meta property="og:url" content="http://yoursite.com/2019/07/16/Linux进程的终止/index.html">
 <meta property="og:site_name" content="朝花夕拾">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="1.进程的终止方式根据《Unix高级系统环境》中的介绍，进程有5种正常终止方式：1、main函数种执行return语句。2、调用exit函数，他只终止运行程序和IO，不终止子进程。3、进程中的最后的一个线程执行return语句4、调用_exit或者_Exit函数。5、进程的最后一个线程调用pthread_exit函数。 3种异常终止方式：1、调用了abort，产生SIGABRT信号2、当进程收到某">
 <meta property="og:locale" content="简体汉语">
-<meta property="og:updated_time" content="2019-06-29T12:22:09.886Z">
+<meta property="og:updated_time" content="2019-07-16T05:10:20.858Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="Linux进程的终止">
+<meta name="twitter:description" content="1.进程的终止方式根据《Unix高级系统环境》中的介绍，进程有5种正常终止方式：1、main函数种执行return语句。2、调用exit函数，他只终止运行程序和IO，不终止子进程。3、进程中的最后的一个线程执行return语句4、调用_exit或者_Exit函数。5、进程的最后一个线程调用pthread_exit函数。 3种异常终止方式：1、调用了abort，产生SIGABRT信号2、当进程收到某">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/29/hello-world/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/16/Linux进程的终止/">
 
 
 
 
 
-  <title>Hello World | 朝花夕拾</title>
+  <title>Linux进程的终止 | 朝花夕拾</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/29/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/Linux进程的终止/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="陆标">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">Linux进程的终止</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-29T20:22:09+08:00">
-                2019-06-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-16T13:10:08+08:00">
+                2019-07-16
               </time>
             
 
@@ -299,19 +299,34 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h3 id="1-进程的终止方式"><a href="#1-进程的终止方式" class="headerlink" title="1.进程的终止方式"></a>1.进程的终止方式</h3><p>根据《Unix高级系统环境》中的介绍，进程有5种正常终止方式：<br>1、main函数种执行return语句。<br>2、调用exit函数，他只终止运行程序和IO，不终止子进程。<br>3、进程中的最后的一个线程执行return语句<br>4、调用_exit或者_Exit函数。<br>5、进程的最后一个线程调用pthread_exit函数。</p>
+<p>3种异常终止方式：<br>1、调用了abort，产生SIGABRT信号<br>2、当进程收到某些异常信号的时候，如：内存越界、有除以0的情况出现。<br>3、最后一个线程对取消请求做出了响应</p>
+<ul>
+<li>父进程终止后，未终止的子进程会被init进程收养，init进程会获取子进程的状态，然后终止子进程，子进程不会再init进程中出现僵死状态。</li>
+<li>如果子进程在父进程之前终止，父进程可以调用wait和waitpid获取子进程的状态。如果子进程没有被妥善的处理就会成为僵死进程。</li>
+</ul>
+<h3 id="2-wait和waitpid的区别"><a href="#2-wait和waitpid的区别" class="headerlink" title="2.wait和waitpid的区别"></a>2.wait和waitpid的区别</h3><p>子进程的终止是一个异步的事件，父进程可以选择忽略或者响应，调用wait和waitpid会发生：</p>
+<ul>
+<li>如果子进程还在执行，那就阻塞。</li>
+<li>如果一个子进程已经终止，则取得子进程的终止状态后就立即返回。</li>
+<li>如果没有任何的子进程则立即返回出错</li>
+</ul>
+<p>两个函数的区别如下：</p>
+<ul>
+<li>在一个子进程的终止前 ，wait会使得调用者阻塞，waitpid可以选择不阻塞。</li>
+<li>waitpid并不等待在其调用之后的第一个终止子进程</li>
+</ul>
+<p>相同点：</p>
+<ul>
+<li>当进程终止，终止进程的终止状态字节就存放在staloc整型指针中，终止状态存放在&lt;sys/wait.h&gt;头文件中，他们的名字都以WIF开头。<br>1、WIFEXITED(status):正常终止子进程返回的状态。<br>2、WIFSIGNALED(status):异常终止子进程的返回状态。<br>3、WIFSTOPPED(status)：当前暂停子进程的返回状态。<br>4、WIFCONTINUED(status):作业控制暂停后已经继续的子进程返回状态。</li>
+</ul>
+<p>waitpid提供的特有功能：<br>1、waitpid可以等待特有的进程，wait只能返回任意一个终止状态的子进程。<br>2、waitpid提供了一个wait的非阻塞版本。<br>3、waitpid通过WUNTRACED和WCONTINUED选项支持作业控制。</p>
+<p><strong>其他结束状态获取函数</strong></p>
+<ul>
+<li>Unix系统还包括另外一个取得进程终止状态的函数-waitid，与waitpid类似但是使用更加的灵活，他使用两个独立的参数表示要等的子进程所属类型，而不是将此与进程ID、进程组ID组合成一个参数。</li>
+<li>wait3和wait4，是UNIX系统遗留下来的两个函数，允许内核返回又终止进程以及所有的子进程的资源该概况。</li>
+</ul>
+<p><strong>Plus</strong><br>进程中为了避免在状态的轮询中，浪费CPU的时间，通常在多进程之间使用信号机制（相当于中断），来进行进程间的通信。</p>
 
       
     </div>
@@ -336,15 +351,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/07/16/Windows权限配置/" rel="next" title="Windows权限配置">
+                <i class="fa fa-chevron-left"></i> Windows权限配置
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/16/常用排序算法/" rel="prev" title="常用排序算法">
-                常用排序算法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -458,7 +473,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-进程的终止方式"><span class="nav-number">1.</span> <span class="nav-text">1.进程的终止方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-wait和waitpid的区别"><span class="nav-number">2.</span> <span class="nav-text">2.wait和waitpid的区别</span></a></li></ol></div>
             
 
           </div>
