@@ -1,90 +1,303 @@
 <!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="utf-8">
-  
+
+
 
   
-  <title>小游戏1（井字棋游戏） | 陆标的个人博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="游戏简介三连棋游戏(两人轮流在印有九格方盘上划“+”或“O”字, 谁先把三个同一记号排成横线、直线、斜线, 即是胜者)。程序提供随机算法和智能算法两种AI，随机算法使用随机数随意选择棋盘上的位置，智能算法通过对每隔落子位置权重的计算，选取最优的落子点。 游戏实现123456789101112131415161718192021222324252627282930313233343536373839">
+
+
+<html class="theme-next muse use-motion" lang="简体汉语">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="游戏简介三连棋游戏(两人轮流在印有九格方盘上划“+”或“O”字, 谁先把三个同一记号排成横线、直线、斜线, 即是胜者)。程序提供随机算法和智能算法两种AI，随机算法使用随机数随意选择棋盘上的位置，智能算法通过对每隔落子位置权重的计算，选取最优的落子点。 游戏实现123456789101112131415161718192021222324252627282930313233343536373839">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小游戏1（井字棋游戏）">
 <meta property="og:url" content="http://yoursite.com/2019/07/16/小游戏1（井字棋游戏）/index.html">
-<meta property="og:site_name" content="陆标的个人博客">
+<meta property="og:site_name" content="朝花夕拾">
 <meta property="og:description" content="游戏简介三连棋游戏(两人轮流在印有九格方盘上划“+”或“O”字, 谁先把三个同一记号排成横线、直线、斜线, 即是胜者)。程序提供随机算法和智能算法两种AI，随机算法使用随机数随意选择棋盘上的位置，智能算法通过对每隔落子位置权重的计算，选取最优的落子点。 游戏实现123456789101112131415161718192021222324252627282930313233343536373839">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="简体汉语">
 <meta property="og:updated_time" content="2019-07-16T03:35:51.196Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小游戏1（井字棋游戏）">
 <meta name="twitter:description" content="游戏简介三连棋游戏(两人轮流在印有九格方盘上划“+”或“O”字, 谁先把三个同一记号排成横线、直线、斜线, 即是胜者)。程序提供随机算法和智能算法两种AI，随机算法使用随机数随意选择棋盘上的位置，智能算法通过对每隔落子位置权重的计算，选取最优的落子点。 游戏实现123456789101112131415161718192021222324252627282930313233343536373839">
-  
-    <link rel="alternate" href="/atom.xml" title="陆标的个人博客" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-</html>
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">陆标的个人博客</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-小游戏1（井字棋游戏）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/07/16/小游戏1（井字棋游戏）/" class="article-date">
-  <time datetime="2019-07-16T03:35:10.000Z" itemprop="datePublished">2019-07-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      小游戏1（井字棋游戏）
-    </h1>
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/16/小游戏1（井字棋游戏）/">
+
+
+
+
+
+  <title>小游戏1（井字棋游戏） | 朝花夕拾</title>
   
 
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="简体汉语">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝花夕拾</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">我双手烤着生命之火取暖，火萎了，我也该走了</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/小游戏1（井字棋游戏）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陆标">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝花夕拾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">小游戏1（井字棋游戏）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-16T11:35:10+08:00">
+                2019-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         <h2 id="游戏简介"><a href="#游戏简介" class="headerlink" title="游戏简介"></a>游戏简介</h2><p>三连棋游戏(两人轮流在印有九格方盘上划“+”或“O”字, 谁先把三个同一记号排成横线、直线、斜线, 即是胜者)。<br>程序提供随机算法和智能算法两种AI，随机算法使用随机数随意选择棋盘上的位置，智能算法通过对每隔落子位置权重的计算，选取最优的落子点。</p>
 <h2 id="游戏实现"><a href="#游戏实现" class="headerlink" title="游戏实现"></a>游戏实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//human takes X, Competitor takes O,</span></span><br><span class="line"><span class="keyword">enum</span> Checker&#123;</span><br><span class="line">    EMPTY, X, O</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//base class of RandomAI, intermediateAI, Human</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Competitor</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//use move to avoid copy</span></span><br><span class="line">    Competitor(Checker type, <span class="built_in">string</span> name):checkerType(type), name(move(name))&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">virtual</span>  ~Competitor()&#123;&#125;</span><br><span class="line">    <span class="comment">//Competitor algorithms : random and intermediateAI</span></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">desiredMove</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;Checker&gt;&gt; &amp;checkBoard, Checker type)</span> </span>= <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//checker type</span></span><br><span class="line">    Checker checkerType;</span><br><span class="line">    <span class="built_in">string</span> name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//move checker by random seed</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RandomAI</span>:</span><span class="keyword">public</span> Competitor&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    RandomAI():Competitor(O,<span class="string">"RandomAI"</span>)&#123;</span><br><span class="line">        srand((<span class="keyword">unsigned</span> <span class="keyword">int</span>) time(<span class="literal">nullptr</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">desiredMove</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;Checker&gt;&gt; &amp;checkBoard, Checker type)</span>override</span>&#123;</span><br><span class="line">        checkerType = type;</span><br><span class="line">        <span class="comment">//traversing the whole board, get empty checker number</span></span><br><span class="line">        <span class="keyword">int</span> emptyCheckerNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;row: checkBoard)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;checker: row)&#123;</span><br><span class="line">                <span class="keyword">if</span>(checker == EMPTY)&#123;</span><br><span class="line">                    emptyCheckerNum++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(emptyCheckerNum == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//get random index</span></span><br><span class="line">        <span class="keyword">int</span>  randomIndex = rand()%(emptyCheckerNum) + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        emptyCheckerNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;row: checkBoard)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;checker: row)&#123;</span><br><span class="line">                <span class="keyword">if</span>(checker == EMPTY)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(++emptyCheckerNum == randomIndex)&#123;</span><br><span class="line">                        checker = checkerType;</span><br><span class="line">                        <span class="keyword">return</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"RandomAI move failed!"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//each step to create a checkBoard with weight</span></span><br><span class="line"><span class="comment">//w_O2 means two O already in a line, so Competitor have to attack, hold max weight for Competitor</span></span><br><span class="line"><span class="comment">//w_X2 means two X already in a line. so Competitor must defence, hold second largest weight for Competitor</span></span><br><span class="line"><span class="comment">//w_X1 means only one X in the line</span></span><br><span class="line"><span class="comment">//w_O1 means only one O in the line</span></span><br><span class="line"><span class="comment">//w_Empty means it is empty in the line</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InterMediateAI</span>:</span> <span class="keyword">public</span> Competitor&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//init weights</span></span><br><span class="line">    InterMediateAI():Competitor(O,<span class="string">"IntermediateAI"</span>),w_O2(<span class="number">10000</span>),w_X2(<span class="number">1000</span>),w_x(<span class="number">10</span>),w_o(<span class="number">6</span>),w_Empty(<span class="number">4</span>)&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">desiredMove</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;Checker &gt;&gt; &amp;checkBoard, Checker type)</span> override</span>&#123;</span><br><span class="line">        checkerType = type;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp(<span class="number">3</span>,<span class="number">0</span>);</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; levelBoard(<span class="number">3</span>,temp);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//count different situation</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; checkBoard.size();i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; checkBoard[i].size();j++)&#123;</span><br><span class="line">                <span class="comment">//count weight in empty place</span></span><br><span class="line">                <span class="keyword">if</span>(checkBoard[i][j] == EMPTY)&#123;</span><br><span class="line">                    <span class="comment">//count weights of same row</span></span><br><span class="line">                    <span class="keyword">int</span> res = countWeight(checkBoard[i][<span class="number">0</span>],checkBoard[i][<span class="number">1</span>], checkBoard[i][<span class="number">2</span>]);</span><br><span class="line">                    <span class="keyword">if</span>(res != <span class="number">-1</span>)&#123;</span><br><span class="line">                        levelBoard[i][j] = levelBoard[i][j] + res;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="comment">//count weights of same column</span></span><br><span class="line">                    res = countWeight(checkBoard[<span class="number">0</span>][j],checkBoard[<span class="number">1</span>][j],checkBoard[<span class="number">2</span>][j]);</span><br><span class="line">                    <span class="keyword">if</span>(res != <span class="number">-1</span>)&#123;</span><br><span class="line">                        levelBoard[i][j] = levelBoard[i][j] + res;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="comment">//in the mainDiagonal</span></span><br><span class="line">                    <span class="keyword">if</span>((i == <span class="number">0</span> &amp;&amp; j == <span class="number">0</span>) || (i == <span class="number">1</span> &amp;&amp; j == <span class="number">1</span>) || (i == <span class="number">2</span> &amp;&amp; j == <span class="number">2</span>))&#123;</span><br><span class="line">                        res = countWeight(checkBoard[<span class="number">0</span>][<span class="number">0</span>],checkBoard[<span class="number">1</span>][<span class="number">1</span>],checkBoard[<span class="number">2</span>][<span class="number">2</span>]);</span><br><span class="line">                        <span class="keyword">if</span>(res != <span class="number">-1</span>)&#123;</span><br><span class="line">                            levelBoard[i][j] = levelBoard[i][j] + res;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="comment">//in the subDiagonal</span></span><br><span class="line">                    <span class="keyword">if</span>((i == <span class="number">0</span> &amp;&amp; j == <span class="number">2</span>)||(i == <span class="number">2</span> &amp;&amp; j == <span class="number">0</span>)||(i == <span class="number">1</span> &amp;&amp; j == <span class="number">1</span>))&#123;</span><br><span class="line">                        res = countWeight(checkBoard[<span class="number">0</span>][<span class="number">2</span>],checkBoard[<span class="number">1</span>][<span class="number">1</span>],checkBoard[<span class="number">2</span>][<span class="number">0</span>]);</span><br><span class="line">                        <span class="keyword">if</span>(res != <span class="number">-1</span>)&#123;</span><br><span class="line">                            levelBoard[i][j] = levelBoard[i][j] + res;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//get max weight pos, which is the best hand</span></span><br><span class="line">        <span class="keyword">int</span> maxI = <span class="number">0</span>, maxJ = <span class="number">0</span>, maxWeight = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; levelBoard.size();i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; levelBoard[i].size();j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(levelBoard[i][j] &gt;= maxWeight &amp;&amp; checkBoard[i][j] == EMPTY)&#123;</span><br><span class="line">                    maxWeight = levelBoard[i][j];</span><br><span class="line">                    maxI = i;</span><br><span class="line">                    maxJ = j;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//set the checker</span></span><br><span class="line">        <span class="keyword">if</span>(checkBoard[maxI][maxJ] == EMPTY)</span><br><span class="line">            checkBoard[maxI][maxJ] = checkerType;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"ERR:IntermediateAI can't get pos"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countWeight</span><span class="params">(Checker checker1, Checker checker2, Checker checker3)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> check1Order = getCheckerOrder(checker1),check2Order = getCheckerOrder(checker2),check3Order = getCheckerOrder(checker3);</span><br><span class="line">        <span class="comment">//cout&lt;&lt;"type1:"&lt;&lt;checker1&lt;&lt;",order1:"&lt;&lt;check1Order&lt;&lt;";   type1:"&lt;&lt;checker2&lt;&lt;",order2:"&lt;&lt;check2Order&lt;&lt;"; type3:"&lt;&lt;checker3&lt;&lt;",order3:"&lt;&lt;check3Order&lt;&lt;endl;</span></span><br><span class="line">        <span class="keyword">int</span> sumCheckerValue = check1Order + check2Order + check3Order;</span><br><span class="line">        <span class="keyword">int</span> sumProduct = (check1Order + <span class="number">1</span>) * (check2Order + <span class="number">1</span>)*(check3Order + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//000</span></span><br><span class="line">        <span class="keyword">if</span>(sumCheckerValue == <span class="number">0</span> &amp;&amp; sumProduct == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> w_Empty;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//100</span></span><br><span class="line">        <span class="keyword">if</span>(sumCheckerValue == <span class="number">1</span> &amp;&amp; sumProduct == <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> w_x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//200</span></span><br><span class="line">        <span class="keyword">if</span>(sumCheckerValue == <span class="number">2</span> &amp;&amp; sumProduct == <span class="number">3</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> w_o;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//110</span></span><br><span class="line">        <span class="keyword">if</span>(sumCheckerValue == <span class="number">2</span> &amp;&amp; sumProduct == <span class="number">4</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span>  w_X2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//220</span></span><br><span class="line">        <span class="keyword">if</span>(sumCheckerValue == <span class="number">4</span> &amp;&amp; sumProduct == <span class="number">9</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> w_O2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//private:</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getCheckerOrder</span><span class="params">(Checker &amp;type)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res ;</span><br><span class="line">        <span class="keyword">if</span>(checkerType == type)&#123;</span><br><span class="line">            res = <span class="number">2</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(type == EMPTY)&#123;</span><br><span class="line">            res = <span class="number">0</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">            res = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//different rank of importance</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> w_O2;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> w_X2;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> w_x;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> w_o;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> w_Empty;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//human player object</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Human</span> :</span> <span class="keyword">public</span> Competitor &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Human():Competitor(X,<span class="string">"Man"</span>)&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">desiredMove</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;Checker&gt;&gt; &amp;checkBoard, Checker type)</span> override</span>&#123;</span><br><span class="line">        checkerType = type;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>,j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter row and column:"</span>;</span><br><span class="line">            <span class="keyword">char</span> rowAndColumn[<span class="number">5</span>];</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt; i;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt;j;</span><br><span class="line">            <span class="keyword">if</span>(checkException(checkBoard,i,j))&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        checkBoard[i][j] = checkerType;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//private:</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">checkException</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;Checker&gt;&gt; &amp;checkBoard, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(i &gt;= <span class="number">3</span> || i &lt; <span class="number">0</span> || j &gt;= <span class="number">3</span> || j &lt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"Out of range"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(checkBoard[i][j] != EMPTY)&#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">"Square taken"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Competition</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Competition()&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//Competitor1 choose X,and take first hand;Competiter2 choose O,and take second hand</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">startCompetition</span><span class="params">(Competitor &amp;competitor1, Competitor &amp;competitor2)</span></span>&#123;</span><br><span class="line">        initCheckerBoard();</span><br><span class="line">        <span class="comment">//-1: continue; 0: tie; 1: X wins; 2: O wins</span></span><br><span class="line">        <span class="keyword">int</span> winnerIndex = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">bool</span> isFirstHand = <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">//return empty until get winner</span></span><br><span class="line">        <span class="keyword">while</span>(winnerIndex == <span class="number">-1</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(isFirstHand)&#123;</span><br><span class="line">                isFirstHand = <span class="literal">false</span>;</span><br><span class="line">                competitor1.desiredMove(checkerBoard,X);</span><br><span class="line">                <span class="comment">//printCheckBoard();</span></span><br><span class="line">            &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                isFirstHand = <span class="literal">true</span>;</span><br><span class="line">                competitor2.desiredMove(checkerBoard,O);</span><br><span class="line">                printCheckBoard();</span><br><span class="line">            &#125;</span><br><span class="line">            winnerIndex = checkWinner();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"==================End====================="</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        printCheckBoard();</span><br><span class="line">        <span class="keyword">if</span>(winnerIndex == <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"The "</span>&lt;&lt;competitor2.name&lt;&lt;<span class="string">" wins"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(winnerIndex == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"The "</span>&lt;&lt;competitor1.name&lt;&lt;<span class="string">" wins"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"Tie"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//private:</span></span><br><span class="line">    <span class="comment">//check which competitor win the game</span></span><br><span class="line">    <span class="comment">//Here are 8 situation to win this game</span></span><br><span class="line">    <span class="comment">//3 situations with same checkers in same row</span></span><br><span class="line">    <span class="comment">//3 situations with same checkers in same column</span></span><br><span class="line">    <span class="comment">//2 situation with same checker in same diagonal</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">checkWinner</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//check 3 rows</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(checkerBoard[i][<span class="number">0</span>] == checkerBoard[i][<span class="number">1</span>] &amp;&amp; checkerBoard[i][<span class="number">1</span>] == checkerBoard[i][<span class="number">2</span>] &amp;&amp; checkerBoard[i][<span class="number">0</span>] != EMPTY)&#123;</span><br><span class="line">                <span class="keyword">return</span> checkerBoard[i][<span class="number">0</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//check 3 columns</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(checkerBoard[<span class="number">0</span>][i] == checkerBoard[<span class="number">1</span>][i] &amp;&amp; checkerBoard[<span class="number">1</span>][i] == checkerBoard[<span class="number">2</span>][i] &amp;&amp; checkerBoard[<span class="number">0</span>][i] != EMPTY)&#123;</span><br><span class="line">                <span class="keyword">return</span> checkerBoard[<span class="number">0</span>][i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//check main diagonal</span></span><br><span class="line">        <span class="keyword">if</span>(checkerBoard[<span class="number">0</span>][<span class="number">0</span>] == checkerBoard[<span class="number">1</span>][<span class="number">1</span>] &amp;&amp; checkerBoard[<span class="number">1</span>][<span class="number">1</span>] == checkerBoard[<span class="number">2</span>][<span class="number">2</span>] &amp;&amp; checkerBoard[<span class="number">0</span>][<span class="number">0</span>] != EMPTY)&#123;</span><br><span class="line">            <span class="keyword">return</span> checkerBoard[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//check subDiagonal</span></span><br><span class="line">        <span class="keyword">if</span>(checkerBoard[<span class="number">0</span>][<span class="number">2</span>] == checkerBoard[<span class="number">1</span>][<span class="number">1</span>] &amp;&amp; checkerBoard[<span class="number">1</span>][<span class="number">1</span>] == checkerBoard[<span class="number">2</span>][<span class="number">0</span>] &amp;&amp; checkerBoard[<span class="number">1</span>][<span class="number">1</span>])&#123;</span><br><span class="line">            <span class="keyword">return</span> checkerBoard[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//check tie</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;row : checkerBoard)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;checker:row)&#123;</span><br><span class="line">                <span class="keyword">if</span>(checker == EMPTY)&#123;</span><br><span class="line">                    <span class="comment">//continue</span></span><br><span class="line">                    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//init check board</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initCheckerBoard</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;Checker&gt; temp(<span class="number">3</span>,EMPTY);</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;Checker&gt;&gt; initBoard(<span class="number">3</span>,temp);</span><br><span class="line">        checkerBoard = initBoard;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//printCheckerBoard</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printCheckBoard</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;row:checkerBoard)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;checker:row)&#123;</span><br><span class="line">                <span class="keyword">if</span>(checker == X)&#123;</span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;<span class="string">"X "</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span>(checker == O)&#123;</span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;<span class="string">"O "</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;<span class="string">"_ "</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;Checker&gt;&gt; checkerBoard;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -104,105 +317,357 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/16/小游戏1（井字棋游戏）/" data-id="cjy59le1g00027wespa589t70" class="article-share-link">Share</a>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/16/常用排序算法/" rel="next" title="常用排序算法">
+                <i class="fa fa-chevron-left"></i> 常用排序算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/16/小游戏2（德州扑克C++）/" rel="prev" title="小游戏2（德州扑克C++）">
+                小游戏2（德州扑克C++） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
       
       
     </footer>
   </div>
   
-    
-<nav id="article-nav">
   
   
-    <a href="/2019/07/16/常用排序算法/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">常用排序算法</div>
-    </a>
-  
-</nav>
+  </article>
 
-  
-</article>
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
 
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li></ul>
+    <div class="post-spread">
+      
     </div>
   </div>
 
 
+          </div>
+          
+
+
+          
+
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
+
+
+
+        </div>
         
-          <li>
-            <a href="/2019/07/16/小游戏1（井字棋游戏）/">小游戏1（井字棋游戏）</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/16/常用排序算法/">常用排序算法</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/29/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
   </div>
 
-  
-</aside>
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">陆标</p>
+              <p class="site-description motion-element" itemprop="description">读万卷书，行万里路</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#游戏简介"><span class="nav-number">1.</span> <span class="nav-text">游戏简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#游戏实现"><span class="nav-number">2.</span> <span class="nav-text">游戏实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">3.</span> <span class="nav-text">测试</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
         
       </div>
-      <footer id="footer">
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陆标</span>
+
   
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2019 陆标<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-
+    
 
   </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="简体汉语">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="游戏介绍 游戏介绍链接 简单介绍：从上到下分别是：同花顺、四条、三带二、同花、顺子、三带一、两对、一对、杂牌。A可以当1和14。      编程实现程序分析PockerGame.hpp:实现具体游戏流程，对洗牌、发牌、码牌、判断输赢等操作进行控制。 Card.hpp:实现对卡片花色、卡片数值的定义和打印等操作。需要注意，在windows 下需要用chcp 65001切换到UTF-8的CMD输出格式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小游戏2（德州扑克C++）">
+<meta property="og:url" content="http://yoursite.com/2019/07/16/小游戏2（德州扑克C++）/index.html">
+<meta property="og:site_name" content="朝花夕拾">
+<meta property="og:description" content="游戏介绍 游戏介绍链接 简单介绍：从上到下分别是：同花顺、四条、三带二、同花、顺子、三带一、两对、一对、杂牌。A可以当1和14。      编程实现程序分析PockerGame.hpp:实现具体游戏流程，对洗牌、发牌、码牌、判断输赢等操作进行控制。 Card.hpp:实现对卡片花色、卡片数值的定义和打印等操作。需要注意，在windows 下需要用chcp 65001切换到UTF-8的CMD输出格式">
+<meta property="og:locale" content="简体汉语">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190506215224990.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190506215934746.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190506220057210.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190506220110686.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190506220126540.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190506220145286.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190506220158242.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190506220210890.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190506220220359.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190506222842842.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-07-16T03:47:10.199Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小游戏2（德州扑克C++）">
+<meta name="twitter:description" content="游戏介绍 游戏介绍链接 简单介绍：从上到下分别是：同花顺、四条、三带二、同花、顺子、三带一、两对、一对、杂牌。A可以当1和14。      编程实现程序分析PockerGame.hpp:实现具体游戏流程，对洗牌、发牌、码牌、判断输赢等操作进行控制。 Card.hpp:实现对卡片花色、卡片数值的定义和打印等操作。需要注意，在windows 下需要用chcp 65001切换到UTF-8的CMD输出格式">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190506215224990.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/16/小游戏2（德州扑克C++）/">
+
+
+
+
+
+  <title>小游戏2（德州扑克C++） | 朝花夕拾</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="简体汉语">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝花夕拾</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">我双手烤着生命之火取暖，火萎了，我也该走了</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/小游戏2（德州扑克C++）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陆标">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝花夕拾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">小游戏2（德州扑克C++）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-16T11:37:22+08:00">
+                2019-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="游戏介绍"><a href="#游戏介绍" class="headerlink" title="游戏介绍"></a>游戏介绍</h2><ul>
+<li><a href="https://www.pokerstars.com/poker/games/rules/hand-rankings/" target="_blank" rel="noopener">游戏介绍链接</a></li>
+<li>简单介绍：<br>从上到下分别是：同花顺、四条、三带二、同花、顺子、三带一、两对、一对、杂牌。A可以当1和14。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20190506215224990.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190506215934746.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190506220057210.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190506220110686.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190506220126540.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190506220145286.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190506220158242.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190506220210890.png" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190506220220359.png" alt="在这里插入图片描述"></p>
+<h2 id="编程实现"><a href="#编程实现" class="headerlink" title="编程实现"></a>编程实现</h2><p><strong>程序分析</strong><br>PockerGame.hpp:实现具体游戏流程，对洗牌、发牌、码牌、判断输赢等操作进行控制。</p>
+<p>Card.hpp:实现对卡片花色、卡片数值的定义和打印等操作。需要注意，在windows 下需要用chcp 65001切换到UTF-8的CMD输出格式。</p>
+<p>Deck.hpp:实现了洗牌算法和发牌操作。</p>
+<p>Player.hpp:实现玩家类，记录玩家的手牌、判断玩家的最好手牌，玩家资金、信息管理等操作。</p>
+<p>PokerHand.hpp:持有五张牌，实现对这五张排的大小等级的判断，其中需要注意A的两种情况。<br><strong>编程实现</strong><br><em>PokerGame.cpp</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Player.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Deck.hpp"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PokerGame</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    PokerGame(<span class="keyword">int</span> playerNumber) : ante(<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="comment">//init player</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; playerNumber;i++)&#123;</span><br><span class="line">            <span class="function">Player <span class="title">player</span><span class="params">(i+<span class="number">1</span>)</span></span>;</span><br><span class="line">            players.push_back(player);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//starting game</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">start</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//clear buffer</span></span><br><span class="line">        board.clear();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;player:players)&#123;</span><br><span class="line">            player.clearHandCard();</span><br><span class="line">        &#125;</span><br><span class="line">        deck.shuffle();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//get ante and deal</span></span><br><span class="line">        <span class="keyword">double</span> allBonus = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;player : players)&#123;</span><br><span class="line">            <span class="comment">//bet down</span></span><br><span class="line">            player.loss(ante);</span><br><span class="line">            allBonus += ante;</span><br><span class="line">            <span class="comment">//dealing</span></span><br><span class="line">            player.putCard(deck.getCard());</span><br><span class="line">            player.putCard(deck.getCard());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"Community Cards :"</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)&#123;</span><br><span class="line">            board.push_back(deck.getCard());</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;board.back().toString()&lt;&lt;<span class="string">"   "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"+++++++++++++++++++++++++++++++++++"</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//comparing pokerHands</span></span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;PokerHand&gt; allBestPokerHand;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;player : players)&#123;</span><br><span class="line">            <span class="comment">//get all best hand</span></span><br><span class="line">            allBestPokerHand.push_back(player.getBestPokerHand(board));</span><br><span class="line"></span><br><span class="line">            <span class="comment">//print player message</span></span><br><span class="line">            player.printPlayerInfo();</span><br><span class="line">            player.printHandCards();</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//print best hand cards</span></span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"    Best hand:"</span>;</span><br><span class="line">            allBestPokerHand.back().printMesg();</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"-   "</span>;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;allBestPokerHand.back().getCardType()&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//get winner</span></span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; winnerIndex;</span><br><span class="line">        winnerIndex.push_back(<span class="number">0</span>);</span><br><span class="line">        PokerHand *bestHand = &amp;allBestPokerHand[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; players.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(*bestHand &lt; allBestPokerHand[i])&#123;</span><br><span class="line">                winnerIndex.clear();</span><br><span class="line">                winnerIndex.push_back(i);</span><br><span class="line">                bestHand = &amp;allBestPokerHand[i];</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (*bestHand == allBestPokerHand[i])&#123;</span><br><span class="line">                winnerIndex.push_back(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//giving bonus</span></span><br><span class="line">        <span class="keyword">double</span> bonus  = allBonus / winnerIndex.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> index:winnerIndex)&#123;</span><br><span class="line">            players[index].earn(bonus);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//print winner</span></span><br><span class="line">        <span class="keyword">if</span>(winnerIndex.size() &gt; <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"Winning hands (tie)"</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"+++++++++++++++++++++++++++++++++++"</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> index: winnerIndex)&#123;</span><br><span class="line">                allBestPokerHand[index].printMesg();</span><br><span class="line">                <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;allBestPokerHand[index].getCardType()&lt;&lt;<span class="string">"   "</span>;</span><br><span class="line">                players[index].printPlayerInfo();</span><br><span class="line">                <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"Winner:"</span>;</span><br><span class="line">            players[winnerIndex[<span class="number">0</span>]].printPlayerInfo();</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"+++++++++++++++++++++++++++++++++++"</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">            allBestPokerHand[winnerIndex[<span class="number">0</span>]].printMesg();</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;allBestPokerHand[winnerIndex[<span class="number">0</span>]].getCardType()&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printBoardCards</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"Community Cards: "</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;card : board)&#123;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;card.toString()&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Player&gt; players;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Card&gt; board;</span><br><span class="line">    Deck deck;</span><br><span class="line">    <span class="keyword">int</span> ante;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><em>Card.hpp</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="comment">// Model the Suit of a Poker Card</span></span><br><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">Suit</span> &#123;</span></span><br><span class="line">    CLUBS, DIAMONDS, HEARTS, SPADES</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> add enum class Rank</span></span><br><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">Rank</span> &#123;</span></span><br><span class="line">    <span class="comment">//ACE can be one or greater than KING</span></span><br><span class="line">    DEUCE=<span class="number">2</span>, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> add class Card</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Card</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Card(Rank rank, Suit suit):c_rank(rank), c_suit(suit)&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">string</span> mark;</span><br><span class="line">        <span class="keyword">switch</span> (c_suit)&#123;</span><br><span class="line">            <span class="keyword">case</span> Suit::CLUBS:</span><br><span class="line">                mark = <span class="string">"\xe2\x99\xa3"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> Suit::DIAMONDS:</span><br><span class="line">                mark = <span class="string">"\xe2\x99\xa6"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> Suit::HEARTS:</span><br><span class="line">                mark = <span class="string">"\xe2\x99\xa5"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> Suit::SPADES:</span><br><span class="line">                mark = <span class="string">"\xe2\x99\xa0"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">string</span> rankMark;</span><br><span class="line">        <span class="keyword">if</span>(getValue() &lt;= <span class="number">10</span>)&#123;</span><br><span class="line">            rankMark = <span class="built_in">std</span>::to_string(getValue());</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">switch</span>(c_rank)&#123;</span><br><span class="line">                <span class="keyword">case</span> Rank::ACE :</span><br><span class="line">                    rankMark = <span class="string">"A"</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> Rank::JACK :</span><br><span class="line">                    rankMark = <span class="string">"J"</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> Rank::QUEEN :</span><br><span class="line">                    rankMark = <span class="string">"Q"</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> Rank::KING :</span><br><span class="line">                    rankMark = <span class="string">"K"</span>;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (rankMark + mark);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">Rank <span class="title">getRank</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> c_rank;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">Suit <span class="title">getSuit</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> c_suit;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span><span class="keyword">const</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>)c_rank;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//overload  "&lt;"</span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt; (<span class="keyword">const</span> Card other) <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">this</span>-&gt;getValue() &lt; other.getValue());</span><br><span class="line">    &#125;</span><br><span class="line">    Card&amp;<span class="keyword">operator</span>= (<span class="keyword">const</span> Card&amp; other)&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;c_rank = other.c_rank;</span><br><span class="line">        <span class="keyword">this</span>-&gt;c_suit = other.c_suit;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Rank c_rank;</span><br><span class="line">    Suit c_suit;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><em>Deck.hpp</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Card.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Deck</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Deck():countDealCards(<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">//init all cards</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; <span class="number">14</span>; i++)&#123;</span><br><span class="line">            Rank rank;</span><br><span class="line">            rank = Rank(i);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++)&#123;</span><br><span class="line">                Suit suit;</span><br><span class="line">                suit = Suit((j));</span><br><span class="line">                <span class="function">Card <span class="title">singleCard</span><span class="params">(rank,suit)</span></span>;</span><br><span class="line">                allCards.push_back(singleCard);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">shuffle</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//shuffle algorithm</span></span><br><span class="line">        srand((<span class="keyword">unsigned</span>)time(<span class="literal">nullptr</span>));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; allCards.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> seed = rand()%(allCards.size() - <span class="number">1</span>);</span><br><span class="line">            Card temp = allCards[seed];</span><br><span class="line">            allCards[seed] = allCards[i];</span><br><span class="line">            allCards[i] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//init counter</span></span><br><span class="line">        countDealCards = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//get card in the Deck</span></span><br><span class="line">    <span class="function">Card <span class="title">getCard</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> allCards[countDealCards++];</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Card&gt; allCards;</span><br><span class="line">    <span class="keyword">int</span> countDealCards;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><em>Player.hpp</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Card.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"PokerHand.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Player(<span class="keyword">int</span> ID, <span class="keyword">double</span> money = <span class="number">100</span>):playerID(ID),money(money)&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// earn bonus</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">earn</span><span class="params">(<span class="keyword">double</span> bonus)</span></span>&#123;</span><br><span class="line">        money += bonus;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//loss money</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">loss</span><span class="params">(<span class="keyword">double</span> betMoney)</span></span>&#123;</span><br><span class="line">        money -= betMoney;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//get card from deck</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">putCard</span><span class="params">(Card card)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(handCards.size() &gt; <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"ERR deal cards error!/n"</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">            handCards.push_back(card);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//get best pokerHand in 7 cards</span></span><br><span class="line">    <span class="function">PokerHand <span class="title">getBestPokerHand</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Card&gt; communityCards)</span></span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;PokerHand&gt; allSituations;</span><br><span class="line">        <span class="comment">//std::cout&lt;&lt;"Size1:"&lt;&lt;communityCards.size()&lt;&lt;";Size2:"&lt;&lt;handCards.size()&lt;&lt;std::endl;</span></span><br><span class="line">        <span class="comment">//first situation</span></span><br><span class="line">        <span class="function">PokerHand <span class="title">communitySituation</span><span class="params">(communityCards[<span class="number">0</span>],communityCards[<span class="number">1</span>],communityCards[<span class="number">2</span>],communityCards[<span class="number">3</span>],communityCards[<span class="number">4</span>])</span></span>;</span><br><span class="line">        allSituations.push_back(communitySituation);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//ten situations</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp; card:handCards)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)&#123;</span><br><span class="line">                <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; MatchIndex;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">5</span>; j++)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(j != i)&#123;</span><br><span class="line">                        MatchIndex.push_back(j);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="function">PokerHand <span class="title">hand</span><span class="params">(card, communityCards[MatchIndex[<span class="number">0</span>]], communityCards[MatchIndex[<span class="number">1</span>]], communityCards[MatchIndex[<span class="number">2</span>]], communityCards[MatchIndex[<span class="number">3</span>]])</span></span>;</span><br><span class="line">                allSituations.push_back(hand);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//another ten situations</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; <span class="number">5</span>; j++)&#123;</span><br><span class="line">                <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; MatchIndex;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>;k &lt; <span class="number">5</span>;k++)&#123;</span><br><span class="line">                    <span class="keyword">if</span>((k != i) &amp;&amp; (k != j))&#123;</span><br><span class="line">                        MatchIndex.push_back(k);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="function">PokerHand <span class="title">hand</span><span class="params">(handCards[<span class="number">0</span>], handCards[<span class="number">1</span>], communityCards[MatchIndex[<span class="number">0</span>]], communityCards[MatchIndex[<span class="number">1</span>]], communityCards[MatchIndex[<span class="number">2</span>]])</span></span>;</span><br><span class="line">                allSituations.push_back(hand);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//find the best situation</span></span><br><span class="line">        <span class="built_in">std</span>::sort(allSituations.begin(),allSituations.end());</span><br><span class="line">        PokerHand best = allSituations.back();</span><br><span class="line">        <span class="comment">//best.printMesg();</span></span><br><span class="line">        <span class="keyword">return</span> best;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//print player message</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printPlayerInfo</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"Player "</span>&lt;&lt;playerID&lt;&lt;<span class="string">":"</span>&lt;&lt;<span class="string">" $"</span>&lt;&lt;money;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//print handCards</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printHandCards</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> card:handCards)&#123;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"    "</span>&lt;&lt;card.toString();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//clear HandCard</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clearHandCard</span><span class="params">()</span></span>&#123;</span><br><span class="line">        handCards.clear();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> playerID;</span><br><span class="line">    <span class="keyword">int</span> money;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Card&gt; handCards;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><em>PokerHand.hpp</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Card.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">Priority</span>&#123;</span></span><br><span class="line">    isStraightFlush, isFourOfAKind, isFullHouse, isFlush, isStraight, isThreeOfAKind, isTwoPair, isOnePair, isHighCard</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PokerHand</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    PokerHand(Card card1, Card card2, Card card3, Card card4, Card card5)&#123;</span><br><span class="line">        handCard.push_back(card1);</span><br><span class="line">        handCard.push_back(card2);</span><br><span class="line">        handCard.push_back(card3);</span><br><span class="line">        handCard.push_back(card4);</span><br><span class="line">        handCard.push_back(card5);</span><br><span class="line">        <span class="built_in">std</span>::sort(handCard.begin(), handCard.end());</span><br><span class="line">        checkHandCard();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//overload "=="</span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> == (<span class="keyword">const</span> PokerHand&amp; other)<span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; handCard.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(handCard[i].getValue() != other.handCard[i].getValue())&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    PokerHand&amp; <span class="keyword">operator</span> = (<span class="keyword">const</span> PokerHand &amp;other)&#123;</span><br><span class="line">        <span class="comment">//PokerHand newHand()</span></span><br><span class="line">        <span class="keyword">this</span>-&gt;handCard = other.handCard;</span><br><span class="line">        <span class="keyword">this</span>-&gt;cardType = other.cardType;</span><br><span class="line">        <span class="keyword">this</span>-&gt;sameCard = other.sameCard;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//overload "&lt;"</span></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(<span class="keyword">const</span> PokerHand&amp; other)<span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="comment">//std::sort(handCard.begin(), handCard.end());</span></span><br><span class="line">        <span class="comment">//checkHandCard();</span></span><br><span class="line">        <span class="keyword">if</span>(*<span class="keyword">this</span> == other)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(cardType &gt; other.cardType)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(((<span class="keyword">int</span>)<span class="keyword">this</span>-&gt;cardType == (<span class="keyword">int</span>)other.cardType))&#123;</span><br><span class="line">            <span class="keyword">bool</span> isLess = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="keyword">this</span>-&gt;sameCard.size()<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;sameCard[i][<span class="number">0</span>].getValue() &gt; other.sameCard[i][<span class="number">0</span>].getValue())&#123;</span><br><span class="line">                    isLess =  <span class="literal">false</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;sameCard[i][<span class="number">0</span>].getValue() &lt; other.sameCard[i][<span class="number">0</span>].getValue())&#123;</span><br><span class="line">                    isLess = <span class="literal">true</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> isLess;</span><br><span class="line">        &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//print BestHand</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printMesg</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;card : handCard)&#123;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;card.toString()&lt;&lt;<span class="string">"   "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//get Card type</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">getCardType</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">string</span> result;</span><br><span class="line">        <span class="keyword">switch</span> (cardType)&#123;</span><br><span class="line">            <span class="keyword">case</span> Priority::isStraightFlush :</span><br><span class="line">                result = <span class="string">"Straight Flush"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> Priority::isFourOfAKind :</span><br><span class="line">                result = <span class="string">"Four of a kind"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> Priority::isFullHouse :</span><br><span class="line">                result = <span class="string">"Full house"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> Priority::isFlush :</span><br><span class="line">                result = <span class="string">"Flush"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> Priority::isThreeOfAKind :</span><br><span class="line">                result = <span class="string">"Three of a kind"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> Priority::isStraight :</span><br><span class="line">                result = <span class="string">"Straight"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> Priority::isTwoPair :</span><br><span class="line">                result = <span class="string">"Two pair"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> Priority::isOnePair :</span><br><span class="line">                result = <span class="string">"Pair"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> Priority::isHighCard :</span><br><span class="line">                result = <span class="string">"High Card"</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Card&gt; handCard;</span><br><span class="line">    Priority cardType;</span><br><span class="line">    <span class="comment">//put same cards into a vector</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Card&gt;&gt; sameCard;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">//check hand cards rank</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">checkHandCard</span><span class="params">()</span></span>&#123;</span><br><span class="line">        sameCard.clear();</span><br><span class="line">        <span class="keyword">bool</span> isStraight = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">bool</span> isFlush = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">bool</span> isLowAceStraight = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(handCard[<span class="number">0</span>].getValue() == <span class="number">2</span> &amp;&amp; handCard[<span class="number">1</span>].getValue() == <span class="number">3</span> &amp;&amp; handCard[<span class="number">2</span>].getValue() == <span class="number">4</span> &amp;&amp; handCard[<span class="number">3</span>].getValue() == <span class="number">5</span> &amp;&amp; handCard[<span class="number">4</span>].getValue() == <span class="number">14</span>)&#123;</span><br><span class="line">            isLowAceStraight = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//check card property</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; handCard.size(); ++i) &#123;</span><br><span class="line">            <span class="comment">//check isStraight</span></span><br><span class="line">            <span class="keyword">if</span>((i != handCard.size()<span class="number">-1</span>) &amp;&amp; (handCard[i].getValue() != (handCard[i+<span class="number">1</span>].getValue()<span class="number">-1</span>)) &amp;&amp; !isLowAceStraight)&#123;</span><br><span class="line">                isStraight = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//check isFlush</span></span><br><span class="line">            <span class="keyword">if</span>((i != handCard.size()<span class="number">-1</span>) &amp;&amp; (handCard[i].getSuit() != handCard[i+<span class="number">1</span>].getSuit()))&#123;</span><br><span class="line">                isFlush = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//get same card list</span></span><br><span class="line">            <span class="keyword">if</span>(sameCard.empty())&#123;</span><br><span class="line">                <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Card&gt; cardList;</span><br><span class="line">                cardList.push_back(handCard[i]);</span><br><span class="line">                sameCard.push_back(cardList);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(sameCard[sameCard.size()<span class="number">-1</span>].back().getValue() == handCard[i].getValue())&#123;</span><br><span class="line">                    sameCard[sameCard.size()<span class="number">-1</span>].push_back(handCard[i]);</span><br><span class="line">                &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Card&gt; cardList;</span><br><span class="line">                    cardList.push_back(handCard[i]);</span><br><span class="line">                    sameCard.push_back(cardList);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//resort sameCard,improve priority of high size card</span></span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Card&gt;&gt; multiCard;</span><br><span class="line">        <span class="keyword">int</span> cardLen = sameCard.size();</span><br><span class="line">        <span class="comment">//divide the same kind of cards</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">4</span>; i++)&#123;</span><br><span class="line">            <span class="comment">//loop all sameCard in size == i</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> f = <span class="number">0</span>; f &lt; cardLen; f++)&#123;</span><br><span class="line">                <span class="keyword">if</span>((<span class="keyword">int</span>)sameCard[f].size() == i)&#123;</span><br><span class="line">                    multiCard.push_back(sameCard[f]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        sameCard = multiCard;</span><br><span class="line">        <span class="comment">//low ACE</span></span><br><span class="line">        <span class="keyword">if</span>(handCard[<span class="number">0</span>].getValue() == <span class="number">2</span> &amp;&amp; handCard[<span class="number">1</span>].getValue() == <span class="number">3</span> &amp;&amp; handCard[<span class="number">2</span>].getValue() == <span class="number">4</span> &amp;&amp; handCard[<span class="number">3</span>].getValue() == <span class="number">5</span> &amp;&amp; handCard[<span class="number">4</span>].getValue() == <span class="number">14</span>)&#123;</span><br><span class="line">            <span class="function">Card <span class="title">ace</span><span class="params">(sameCard.back().back().c_rank,sameCard.back().back().c_suit)</span></span>;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Card&gt; first;</span><br><span class="line">            first.push_back(ace);</span><br><span class="line">            sameCard.erase(sameCard.end());</span><br><span class="line">            sameCard.insert(sameCard.begin(),first);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//get cards type</span></span><br><span class="line">        <span class="keyword">if</span>(isStraight &amp;&amp; isFlush)&#123;</span><br><span class="line">            cardType = Priority::isStraightFlush;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>((sameCard.size() == <span class="number">2</span>) &amp;&amp; (sameCard[<span class="number">1</span>].size() == <span class="number">4</span>))&#123;</span><br><span class="line">            cardType = Priority::isFourOfAKind;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>((sameCard.size() == <span class="number">2</span>) &amp;&amp; (sameCard[<span class="number">1</span>].size() == <span class="number">3</span>))&#123;</span><br><span class="line">            cardType = Priority::isFullHouse;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(isFlush)&#123;</span><br><span class="line">            cardType = Priority::isFlush;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isStraight)&#123;</span><br><span class="line">            cardType = Priority::isStraight;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> ((sameCard.size() == <span class="number">3</span>) &amp;&amp; (sameCard[<span class="number">2</span>].size() == <span class="number">3</span>))&#123;</span><br><span class="line">            cardType = Priority::isThreeOfAKind;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> ((sameCard.size() == <span class="number">3</span>) &amp;&amp; (sameCard[<span class="number">2</span>].size() == <span class="number">2</span>))&#123;</span><br><span class="line">            cardType = Priority::isTwoPair;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> ((sameCard.size() == <span class="number">4</span>) &amp;&amp; (sameCard[<span class="number">3</span>].size() == <span class="number">2</span>))&#123;</span><br><span class="line">            cardType = Priority::isOnePair;</span><br><span class="line">        &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">            cardType = Priority::isHighCard;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>游戏效果</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20190506222842842.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/16/小游戏1（井字棋游戏）/" rel="next" title="小游戏1（井字棋游戏）">
+                <i class="fa fa-chevron-left"></i> 小游戏1（井字棋游戏）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">陆标</p>
+              <p class="site-description motion-element" itemprop="description">读万卷书，行万里路</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#游戏介绍"><span class="nav-number">1.</span> <span class="nav-text">游戏介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程实现"><span class="nav-number">2.</span> <span class="nav-text">编程实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陆标</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
