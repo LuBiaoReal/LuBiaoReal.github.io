@@ -5,15 +5,19 @@
   
 
   
-  <title>陆标的个人博客</title>
+  <title>小游戏1（井字棋游戏） | 陆标的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="陆标的个人博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="游戏简介三连棋游戏(两人轮流在印有九格方盘上划“+”或“O”字, 谁先把三个同一记号排成横线、直线、斜线, 即是胜者)。程序提供随机算法和智能算法两种AI，随机算法使用随机数随意选择棋盘上的位置，智能算法通过对每隔落子位置权重的计算，选取最优的落子点。 游戏实现123456789101112131415161718192021222324252627282930313233343536373839">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小游戏1（井字棋游戏）">
+<meta property="og:url" content="http://yoursite.com/2019/07/16/小游戏1（井字棋游戏）/index.html">
 <meta property="og:site_name" content="陆标的个人博客">
+<meta property="og:description" content="游戏简介三连棋游戏(两人轮流在印有九格方盘上划“+”或“O”字, 谁先把三个同一记号排成横线、直线、斜线, 即是胜者)。程序提供随机算法和智能算法两种AI，随机算法使用随机数随意选择棋盘上的位置，智能算法通过对每隔落子位置权重的计算，选取最优的落子点。 游戏实现123456789101112131415161718192021222324252627282930313233343536373839">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-16T03:35:51.196Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="陆标的个人博客">
+<meta name="twitter:title" content="小游戏1（井字棋游戏）">
+<meta name="twitter:description" content="游戏简介三连棋游戏(两人轮流在印有九格方盘上划“+”或“O”字, 谁先把三个同一记号排成横线、直线、斜线, 即是胜者)。程序提供随机算法和智能算法两种AI，随机算法使用随机数随意选择棋盘上的位置，智能算法通过对每隔落子位置权重的计算，选取最优的落子点。 游戏实现123456789101112131415161718192021222324252627282930313233343536373839">
   
     <link rel="alternate" href="/atom.xml" title="陆标的个人博客" type="application/atom+xml">
   
@@ -60,9 +64,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-小游戏1（井字棋游戏）" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-小游戏1（井字棋游戏）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/16/小游戏1（井字棋游戏）/" class="article-date">
   <time datetime="2019-07-16T03:35:10.000Z" itemprop="datePublished">2019-07-16</time>
@@ -75,8 +77,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/16/小游戏1（井字棋游戏）/">小游戏1（井字棋游戏）</a>
+    <h1 class="article-title" itemprop="name">
+      小游戏1（井字棋游戏）
     </h1>
   
 
@@ -109,122 +111,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-常用排序算法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/07/16/常用排序算法/" class="article-date">
-  <time datetime="2019-07-16T03:29:31.000Z" itemprop="datePublished">2019-07-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/16/常用排序算法/">常用排序算法</a>
-    </h1>
+    <a href="/2019/07/16/常用排序算法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">常用排序算法</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-快速排序（使用最常见的排序算法）"><a href="#1-快速排序（使用最常见的排序算法）" class="headerlink" title="1.快速排序（使用最常见的排序算法）"></a>1.快速排序（使用最常见的排序算法）</h2><h4 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h4><ul>
-<li>快速排序是一个分治思想，平均复杂度是n*lg(n)。</li>
-</ul>
-<p><strong>Divide</strong>：数组A[p..r]分为两个子数组A[p..q-1],A[q+1..r]，使得A[p..q-1]上所有元素小于A[q];A[q+1..r]上所有的元素都大于A[q]。<br><strong>Conquer</strong>：通过对快排的递归，对两个子数组A[p..q-1]和A[q+1..r]进行排序。<br><strong>Combine</strong>：分完就已经有序。</p>
-<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=========快排算法=========</span></span><br><span class="line"><span class="comment">//使得arr[low]..arr[q-1]中的每一个元素都小于等于arr[q], arr[q]也小于等于arr[q+1]..arr[high]。</span></span><br><span class="line"><span class="comment">//简而言之，让左边的数字都小于右边的数字</span></span><br><span class="line"><span class="comment">//最坏时间复杂度：n^2 , 平均时间复杂度：n*lg(n)</span></span><br><span class="line"><span class="comment">//优化：为了使得输入均匀的分布，对输入使用随机数</span></span><br><span class="line"><span class="comment">//排序一个数组,初始调用Qsort(A,0,A.size()-1).</span></span><br><span class="line"><span class="comment">//=========================</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partirtion</span><span class="params">(<span class="keyword">int</span> A[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = A[high];</span><br><span class="line">    <span class="keyword">int</span> i = low - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = low;j &lt; high; j++)&#123;</span><br><span class="line">        <span class="comment">//左边的数字如果大于右边的数字，就交换位置</span></span><br><span class="line">        <span class="keyword">if</span>(A[j] &lt;= x)&#123;</span><br><span class="line">            i++;</span><br><span class="line">            <span class="comment">//互换A[i]和A[j]</span></span><br><span class="line">            <span class="keyword">int</span> tmp = A[i];</span><br><span class="line">            A[i] =A[j];</span><br><span class="line">            A[j] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//将主元（pivot）给到i的下一个</span></span><br><span class="line">    <span class="keyword">int</span> temp = A[i+<span class="number">1</span>];</span><br><span class="line">    A[i+<span class="number">1</span>] = A[high];</span><br><span class="line">    A[high] = temp;</span><br><span class="line">    <span class="keyword">return</span> i+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Qsort</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(low &lt; high)&#123;</span><br><span class="line">        <span class="keyword">int</span> q =partirtion(arr,low,high);</span><br><span class="line">        Qsort(arr,low,q<span class="number">-1</span>);</span><br><span class="line">        Qsort(arr,q+<span class="number">1</span>,high);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-插入排序"><a href="#2-插入排序" class="headerlink" title="2.插入排序"></a>2.插入排序</h2><h4 id="算法分析-1"><a href="#算法分析-1" class="headerlink" title="算法分析"></a>算法分析</h4><ul>
-<li>适用于少量元素的排序，工作方式就像是排序一副扑克牌，每次从右向左对每一张牌进行比较。最坏情况是n^2^。<h5 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=============插入排序==========</span></span><br><span class="line"><span class="comment">//从插入的位置起步，往前作比较，输入n指长度</span></span><br><span class="line"><span class="comment">//===============================</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span> A[],<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt; n;i++)&#123;</span><br><span class="line">        <span class="comment">//把A[i]插入到A[1..i-1]中</span></span><br><span class="line">        <span class="keyword">int</span> key = A[i];</span><br><span class="line">        <span class="keyword">int</span> j = i - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(j &gt;<span class="number">0</span> &amp;&amp; A[j] &gt; key)&#123;</span><br><span class="line">            A[j+<span class="number">1</span>] = A[j];</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//j+1就是需要插入的位置</span></span><br><span class="line">        A[j + <span class="number">1</span>] = key;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="3-并归排序"><a href="#3-并归排序" class="headerlink" title="3.并归排序"></a>3.并归排序</h2><h4 id="算法分析-2"><a href="#算法分析-2" class="headerlink" title="算法分析"></a>算法分析</h4><ul>
-<li>归并排序完全按照分治的思想，关键的操作在于合并步骤，需要时间复杂度为n。<h4 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//===========归并排序==========</span></span><br><span class="line"><span class="comment">//Merge就是合并的过程，相当于在两堆排好序的牌中，每次选取最上面的两张进行比较，选取其中较小的一张</span></span><br><span class="line"><span class="comment">//A是数组，p&lt;=q&lt;r,Merge过程假设A[p..q]和A[q+1..r]都已经排好序了，元素的总数是：n = r-p+1</span></span><br><span class="line"><span class="comment">//r,q,p都是指的下标</span></span><br><span class="line"><span class="comment">//=============================</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> p, <span class="keyword">int</span> q, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="comment">//n1 n2 就是两个新数组的界</span></span><br><span class="line">    <span class="keyword">int</span> n1 = q - p +<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> n2 = r - q;</span><br><span class="line">    <span class="comment">//将这两个赋值为左右两个新数组,最后一个数放入一个最大数作为结尾标志</span></span><br><span class="line">    <span class="keyword">int</span> *L = <span class="keyword">new</span> <span class="keyword">int</span>[n1+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> *R = <span class="keyword">new</span> <span class="keyword">int</span>[n2+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n1; i++)&#123;</span><br><span class="line">        L[i] = A[p+i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n2; i++)&#123;</span><br><span class="line">        R[i] = A[q+i+<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    L[n1] = INT8_MAX;</span><br><span class="line">    R[n2] = INT8_MAX;</span><br><span class="line">    <span class="comment">//i记录左边数组的下标，j记录右边数组的下标</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = p; k &lt; r; k++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(L[i] &lt;= R[j])&#123;</span><br><span class="line">            A[k] = L[i];</span><br><span class="line">            i++;</span><br><span class="line">        &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">            A[k] = R[j];</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> p, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p &lt; r)&#123;</span><br><span class="line">        <span class="keyword">int</span> q = (p+r)/<span class="number">2</span>;</span><br><span class="line">        mergeSort(A,p,q);</span><br><span class="line">        mergeSort(A,q+<span class="number">1</span>,r);</span><br><span class="line">        merge(A,p,q,r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="4-计数排序"><a href="#4-计数排序" class="headerlink" title="4.计数排序"></a>4.计数排序</h2><h4 id="算法分析-3"><a href="#算法分析-3" class="headerlink" title="算法分析"></a>算法分析</h4><ul>
-<li>计数排序的基本思想是：对每一个输入元素x，确定小于x的元素个数。利用这个性质就可以直接把x放到指定输出数组的位置上了。适用于数组中的元素都小于数组中的最大元素的情况。<h4 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//===========计数排序==============</span></span><br><span class="line"><span class="comment">//函数输入为：input输入数组、n是输入和输出数组的长度、k是数组中的最大数</span></span><br><span class="line"><span class="comment">//================================</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">countSort</span><span class="params">(<span class="keyword">int</span> input[], <span class="keyword">int</span> n, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* counter = <span class="keyword">new</span> <span class="keyword">int</span>[k+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span>* output = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">    <span class="comment">//初始化计数器</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= k;i++)&#123;</span><br><span class="line">        counter[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//记录输入有多少个当前counter下标的值</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">        counter[input[i]]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//对每一个下标记录与之前的求和,求和的结果就是下标在输出数组的位置</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k;i++)&#123;</span><br><span class="line">        counter[i] = counter[i]+counter[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//通过计数器寻址，对输出赋值</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n<span class="number">-1</span>;i &gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="comment">//个数还需要减1，成为下标</span></span><br><span class="line">        output[counter[input[i]]<span class="number">-1</span>] = input[i];</span><br><span class="line">        counter[input[i]]--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//将输出给输入</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">        input[i] = output[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="5-基数排序"><a href="#5-基数排序" class="headerlink" title="5.基数排序"></a>5.基数排序</h2><h4 id="算法分析-4"><a href="#算法分析-4" class="headerlink" title="算法分析"></a>算法分析</h4><ul>
-<li>基数排序是对每一个数的每一位进行排序，运行时间为n，比快排的n*lg(n)要好。<h4 id="实现-4"><a href="#实现-4" class="headerlink" title="实现"></a>实现</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//=========基数排序===============</span></span><br><span class="line"><span class="comment">//先求出所有数中最大数字的位数</span></span><br><span class="line"><span class="comment">//再根据键值的每一位数字，来分配一个桶</span></span><br><span class="line"><span class="comment">//===============================</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxbit</span><span class="params">(<span class="keyword">int</span> data[], <span class="keyword">int</span> n)</span> <span class="comment">//辅助函数，求数据的最大位数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> maxData = data[<span class="number">0</span>];              <span class="comment">///&lt; 最大数</span></span><br><span class="line">    <span class="comment">/// 先求出最大数，再求其位数，这样有原先依次每个数判断其位数，稍微优化点。</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (maxData &lt; data[i])</span><br><span class="line">            maxData = data[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> d = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> p = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">while</span> (maxData &gt;= p)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//p *= 10; // Maybe overflow</span></span><br><span class="line">        maxData /= <span class="number">10</span>;</span><br><span class="line">        ++d;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">radixsort</span><span class="params">(<span class="keyword">int</span> data[], <span class="keyword">int</span> n)</span> <span class="comment">//基数排序</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> d = maxbit(data, n);</span><br><span class="line">    <span class="keyword">int</span> *tmp = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">    <span class="keyword">int</span> *count = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>]; <span class="comment">//计数器</span></span><br><span class="line">    <span class="keyword">int</span> i, j, k;</span><br><span class="line">    <span class="keyword">int</span> radix = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= d; i++) <span class="comment">//进行d次排序</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++)</span><br><span class="line">            count[j] = <span class="number">0</span>; <span class="comment">//每次分配前清空计数器</span></span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            k = (data[j] / radix) % <span class="number">10</span>; <span class="comment">//统计每个桶中的记录数</span></span><br><span class="line">            count[k]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">1</span>; j &lt; <span class="number">10</span>; j++)</span><br><span class="line">            count[j] = count[j - <span class="number">1</span>] + count[j]; <span class="comment">//将tmp中的位置依次分配给每个桶</span></span><br><span class="line">        <span class="keyword">for</span>(j = n - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--) <span class="comment">//将所有桶中记录依次收集到tmp中</span></span><br><span class="line">        &#123;</span><br><span class="line">            k = (data[j] / radix) % <span class="number">10</span>;</span><br><span class="line">            tmp[count[k] - <span class="number">1</span>] = data[j];</span><br><span class="line">            count[k]--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">            data[j] = tmp[j];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        radix = radix * <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">delete</span> []tmp;</span><br><span class="line">    <span class="keyword">delete</span> []count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/16/常用排序算法/" data-id="cjy59le1f00017wesxy6h6tmw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/29/hello-world/" class="article-date">
-  <time datetime="2019-06-29T12:22:09.886Z" itemprop="datePublished">2019-06-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/29/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/29/hello-world/" data-id="cjy59le1a00007wesotwl6exa" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
