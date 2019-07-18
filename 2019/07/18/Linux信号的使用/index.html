@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="1.进程的终止方式根据《Unix高级系统环境》中的介绍，进程有5种正常终止方式：1、main函数种执行return语句。2、调用exit函数，他只终止运行程序和IO，不终止子进程。3、进程中的最后的一个线程执行return语句4、调用_exit或者_Exit函数。5、进程的最后一个线程调用pthread_exit函数。 3种异常终止方式：1、调用了abort，产生SIGABRT信号2、当进程收到某">
+<meta name="description" content="概要 信号时软件中断，一种处理异步事件的方法，每个信号都有一个名字，这些名字都是以SIG开头。 产生信号的条件有很多种：  1、当用户按下终端按键时，引发终端产生的信号。Ctrl+C等。  2、 硬件产生信号，除了0、无效内存。  3、进程被调用了kill函数。  4、检测到了某个软件条件。比如SIGURG(网络链接传来数据)、SIGPIPE（在管道读进程已经终止）、SIGALRM(设置的定时器超">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux进程的终止">
-<meta property="og:url" content="http://yoursite.com/2019/07/16/Linux进程的终止/index.html">
+<meta property="og:title" content="Linux信号的使用">
+<meta property="og:url" content="http://yoursite.com/2019/07/18/Linux信号的使用/index.html">
 <meta property="og:site_name" content="朝花夕拾">
-<meta property="og:description" content="1.进程的终止方式根据《Unix高级系统环境》中的介绍，进程有5种正常终止方式：1、main函数种执行return语句。2、调用exit函数，他只终止运行程序和IO，不终止子进程。3、进程中的最后的一个线程执行return语句4、调用_exit或者_Exit函数。5、进程的最后一个线程调用pthread_exit函数。 3种异常终止方式：1、调用了abort，产生SIGABRT信号2、当进程收到某">
+<meta property="og:description" content="概要 信号时软件中断，一种处理异步事件的方法，每个信号都有一个名字，这些名字都是以SIG开头。 产生信号的条件有很多种：  1、当用户按下终端按键时，引发终端产生的信号。Ctrl+C等。  2、 硬件产生信号，除了0、无效内存。  3、进程被调用了kill函数。  4、检测到了某个软件条件。比如SIGURG(网络链接传来数据)、SIGPIPE（在管道读进程已经终止）、SIGALRM(设置的定时器超">
 <meta property="og:locale" content="简体汉语">
-<meta property="og:updated_time" content="2019-07-16T05:10:20.858Z">
+<meta property="og:updated_time" content="2019-07-18T14:07:37.479Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux进程的终止">
-<meta name="twitter:description" content="1.进程的终止方式根据《Unix高级系统环境》中的介绍，进程有5种正常终止方式：1、main函数种执行return语句。2、调用exit函数，他只终止运行程序和IO，不终止子进程。3、进程中的最后的一个线程执行return语句4、调用_exit或者_Exit函数。5、进程的最后一个线程调用pthread_exit函数。 3种异常终止方式：1、调用了abort，产生SIGABRT信号2、当进程收到某">
+<meta name="twitter:title" content="Linux信号的使用">
+<meta name="twitter:description" content="概要 信号时软件中断，一种处理异步事件的方法，每个信号都有一个名字，这些名字都是以SIG开头。 产生信号的条件有很多种：  1、当用户按下终端按键时，引发终端产生的信号。Ctrl+C等。  2、 硬件产生信号，除了0、无效内存。  3、进程被调用了kill函数。  4、检测到了某个软件条件。比如SIGURG(网络链接传来数据)、SIGPIPE（在管道读进程已经终止）、SIGALRM(设置的定时器超">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/16/Linux进程的终止/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/18/Linux信号的使用/">
 
 
 
 
 
-  <title>Linux进程的终止 | 朝花夕拾</title>
+  <title>Linux信号的使用 | 朝花夕拾</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/Linux进程的终止/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/Linux信号的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="陆标">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux进程的终止</h1>
+          <h1 class="post-title" itemprop="name headline">Linux信号的使用</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-16T13:10:08+08:00">
-                2019-07-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T22:07:20+08:00">
+                2019-07-18
               </time>
             
 
@@ -299,34 +299,34 @@
       
 
       
-        <h3 id="1-进程的终止方式"><a href="#1-进程的终止方式" class="headerlink" title="1.进程的终止方式"></a>1.进程的终止方式</h3><p>根据《Unix高级系统环境》中的介绍，进程有5种正常终止方式：<br>1、main函数种执行return语句。<br>2、调用exit函数，他只终止运行程序和IO，不终止子进程。<br>3、进程中的最后的一个线程执行return语句<br>4、调用_exit或者_Exit函数。<br>5、进程的最后一个线程调用pthread_exit函数。</p>
-<p>3种异常终止方式：<br>1、调用了abort，产生SIGABRT信号<br>2、当进程收到某些异常信号的时候，如：内存越界、有除以0的情况出现。<br>3、最后一个线程对取消请求做出了响应</p>
-<ul>
-<li>父进程终止后，未终止的子进程会被init进程收养，init进程会获取子进程的状态，然后终止子进程，子进程不会再init进程中出现僵死状态。</li>
-<li>如果子进程在父进程之前终止，父进程可以调用wait和waitpid获取子进程的状态。如果子进程没有被妥善的处理就会成为僵死进程。</li>
+        <h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><ul>
+<li>信号时软件中断，一种处理异步事件的方法，每个信号都有一个名字，这些名字都是以SIG开头。</li>
+<li>产生信号的条件有很多种：<br>  1、当用户按下终端按键时，引发终端产生的信号。Ctrl+C等。<br>  2、 硬件产生信号，除了0、无效内存。<br>  3、进程被调用了kill函数。<br>  4、检测到了某个软件条件。比如SIGURG(网络链接传来数据)、SIGPIPE（在管道读进程已经终止）、SIGALRM(设置的定时器超时)。</li>
 </ul>
-<h3 id="2-wait和waitpid的区别"><a href="#2-wait和waitpid的区别" class="headerlink" title="2.wait和waitpid的区别"></a>2.wait和waitpid的区别</h3><p>子进程的终止是一个异步的事件，父进程可以选择忽略或者响应，调用wait和waitpid会发生：</p>
-<ul>
-<li>如果子进程还在执行，那就阻塞。</li>
-<li>如果一个子进程已经终止，则取得子进程的终止状态后就立即返回。</li>
-<li>如果没有任何的子进程则立即返回出错</li>
+<h2 id="信号的使用"><a href="#信号的使用" class="headerlink" title="信号的使用"></a>信号的使用</h2><ul>
+<li><p>最简单的接口是singnal，但signal的函数原型太复杂，可以使用下面的typedef，可以更简单一些。第一个参数signo是信号名，是接收到此信号的时候，要调用的函数地址（包括：SIG_IGN ：忽略系统动作,SIG_DFL :系统默认动作, ）:</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="keyword">void</span> <span class="title">Sigfunc</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function">Sigfunc *  <span class="title">signal</span><span class="params">(<span class="keyword">int</span> , Sigfunc *)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//信号处理函数</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sig_usr</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span> )</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(signal(SIGUSR1,sig_usr) == SIG_ERR)&#123;</span><br><span class="line">		err_sys(<span class="string">"can't  catch  err!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	pause();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  我们在在终端使用：kill USR1 (pid)<br>  进程就会接收到SIG_USR1信号。<br>  signal的缺点：不改变信号的处理方式，就不能确定信号的当前处理方式。而sigaction函数则可以确定一个信号的处理方式，无需改变它。</p>
+</li>
 </ul>
-<p>两个函数的区别如下：</p>
 <ul>
-<li>在一个子进程的终止前 ，wait会使得调用者阻塞，waitpid可以选择不阻塞。</li>
-<li>waitpid并不等待在其调用之后的第一个终止子进程</li>
+<li>在早期的时候进程信号可能存在丢失的情况，同时，系统对信号的控制能力也很差，系统通常不具备信号的阻塞能力。后来通过捕捉到信号后，设置信号已经发生的标志位的方式，来进行判断信号是否丢失。</li>
+<li>当产生一个信号时，事件可以时硬件异常（除以0）、软件异常（定时器超时）、终端信号、kill函数的发生，内核会在进程中以某种形式设置一个标志。当信号传递过程中，我么称之为信号是未决的。如果有多个信号传给一个进程，PoSIX并没有规定它的顺序。</li>
 </ul>
-<p>相同点：</p>
-<ul>
-<li>当进程终止，终止进程的终止状态字节就存放在staloc整型指针中，终止状态存放在&lt;sys/wait.h&gt;头文件中，他们的名字都以WIF开头。<br>1、WIFEXITED(status):正常终止子进程返回的状态。<br>2、WIFSIGNALED(status):异常终止子进程的返回状态。<br>3、WIFSTOPPED(status)：当前暂停子进程的返回状态。<br>4、WIFCONTINUED(status):作业控制暂停后已经继续的子进程返回状态。</li>
+<h2 id="发送信号相关的函数"><a href="#发送信号相关的函数" class="headerlink" title="发送信号相关的函数"></a>发送信号相关的函数</h2><ul>
+<li><p>kill和raise。kill将信号发送给进程和进程组，raise函数允许进程向着自身发送信号。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//调用</span></span><br><span class="line">raise(signo );</span><br><span class="line"><span class="comment">//等同于调用,pid &gt; 0 ，信号给到ID为pid的进程；pid==0，信号给到同组所有进程。</span></span><br><span class="line">kill(getpid(), signo);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>alarm和pause，alarm函数可设置一个定时器，产生SIGALRM信号，pause函数会使得进程一直挂起，直到捕捉到一个信号。longjmp无法很好的处理信号间的竞争，可选择select和poll函数。</p>
+</li>
+<li><p>sigaction函数是检查或者修改与指定信号相关的处理动作。sigsetjmp和siglongjmp用于非局部转移，常调用longjmp回到主循环中。</p>
+</li>
+<li><p>sigsuspend：用于解除信号阻塞后，被推迟响应的情况。先恢复被屏蔽字，然后重新进入休眠。</p>
+</li>
+<li><p>abort：使得程序异常的终止。</p>
+</li>
 </ul>
-<p>waitpid提供的特有功能：<br>1、waitpid可以等待特有的进程，wait只能返回任意一个终止状态的子进程。<br>2、waitpid提供了一个wait的非阻塞版本。<br>3、waitpid通过WUNTRACED和WCONTINUED选项支持作业控制。</p>
-<p><strong>其他结束状态获取函数</strong></p>
-<ul>
-<li>Unix系统还包括另外一个取得进程终止状态的函数-waitid，与waitpid类似但是使用更加的灵活，他使用两个独立的参数表示要等的子进程所属类型，而不是将此与进程ID、进程组ID组合成一个参数。</li>
-<li>wait3和wait4，是UNIX系统遗留下来的两个函数，允许内核返回又终止进程以及所有的子进程的资源该概况。</li>
-</ul>
-<p><strong>Plus</strong><br>进程中为了避免在状态的轮询中，浪费CPU的时间，通常在多进程之间使用信号机制（相当于中断），来进行进程间的通信。</p>
 
       
     </div>
@@ -351,8 +351,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/16/Windows权限配置/" rel="next" title="Windows权限配置">
-                <i class="fa fa-chevron-left"></i> Windows权限配置
+              <a href="/2019/07/18/Linux进程关系/" rel="next" title="Linux进程关系">
+                <i class="fa fa-chevron-left"></i> Linux进程关系
               </a>
             
           </div>
@@ -360,10 +360,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/18/Linux进程关系/" rel="prev" title="Linux进程关系">
-                Linux进程关系 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -487,7 +483,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-进程的终止方式"><span class="nav-number">1.</span> <span class="nav-text">1.进程的终止方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-wait和waitpid的区别"><span class="nav-number">2.</span> <span class="nav-text">2.wait和waitpid的区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概要"><span class="nav-number">1.</span> <span class="nav-text">概要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号的使用"><span class="nav-number">2.</span> <span class="nav-text">信号的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送信号相关的函数"><span class="nav-number">3.</span> <span class="nav-text">发送信号相关的函数</span></a></li></ol></div>
             
 
           </div>

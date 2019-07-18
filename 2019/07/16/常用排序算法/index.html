@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="1.快速排序（使用最常见的排序算法）算法分析 快速排序是一个分治思想，平均复杂度是n*lg(n)。  Divide：数组A[p..r]分为两个子数组A[p..q-1],A[q+1..r]，使得A[p..q-1]上所有元素小于A[q];A[q+1..r]上所有的元素都大于A[q]。Conquer：通过对快排的递归，对两个子数组A[p..q-1]和A[q+1..r]进行排序。Combine：分完就已经">
+<meta name="description" content="0. 冒泡排序123456789void bubble_sort(int arr[], int len) &amp;#123;      int i, j;  	//外层循环控制趟数，总趟数为len-1    for (i = 0; i &amp;lt; len - 1; i++)          		//内层循环为当前i趟数 所需要比较的次数        for (j = 0; j &amp;lt; len - 1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常用排序算法">
 <meta property="og:url" content="http://yoursite.com/2019/07/16/常用排序算法/index.html">
 <meta property="og:site_name" content="朝花夕拾">
-<meta property="og:description" content="1.快速排序（使用最常见的排序算法）算法分析 快速排序是一个分治思想，平均复杂度是n*lg(n)。  Divide：数组A[p..r]分为两个子数组A[p..q-1],A[q+1..r]，使得A[p..q-1]上所有元素小于A[q];A[q+1..r]上所有的元素都大于A[q]。Conquer：通过对快排的递归，对两个子数组A[p..q-1]和A[q+1..r]进行排序。Combine：分完就已经">
+<meta property="og:description" content="0. 冒泡排序123456789void bubble_sort(int arr[], int len) &amp;#123;      int i, j;  	//外层循环控制趟数，总趟数为len-1    for (i = 0; i &amp;lt; len - 1; i++)          		//内层循环为当前i趟数 所需要比较的次数        for (j = 0; j &amp;lt; len - 1">
 <meta property="og:locale" content="简体汉语">
-<meta property="og:updated_time" content="2019-07-16T03:30:43.913Z">
+<meta property="og:updated_time" content="2019-07-18T14:06:26.603Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用排序算法">
-<meta name="twitter:description" content="1.快速排序（使用最常见的排序算法）算法分析 快速排序是一个分治思想，平均复杂度是n*lg(n)。  Divide：数组A[p..r]分为两个子数组A[p..q-1],A[q+1..r]，使得A[p..q-1]上所有元素小于A[q];A[q+1..r]上所有的元素都大于A[q]。Conquer：通过对快排的递归，对两个子数组A[p..q-1]和A[q+1..r]进行排序。Combine：分完就已经">
+<meta name="twitter:description" content="0. 冒泡排序123456789void bubble_sort(int arr[], int len) &amp;#123;      int i, j;  	//外层循环控制趟数，总趟数为len-1    for (i = 0; i &amp;lt; len - 1; i++)          		//内层循环为当前i趟数 所需要比较的次数        for (j = 0; j &amp;lt; len - 1">
 
 
 
@@ -299,7 +299,9 @@
       
 
       
-        <h2 id="1-快速排序（使用最常见的排序算法）"><a href="#1-快速排序（使用最常见的排序算法）" class="headerlink" title="1.快速排序（使用最常见的排序算法）"></a>1.快速排序（使用最常见的排序算法）</h2><h4 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h4><ul>
+        <h2 id="0-冒泡排序"><a href="#0-冒泡排序" class="headerlink" title="0. 冒泡排序"></a>0. 冒泡排序</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubble_sort</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> len)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i, j;  </span><br><span class="line">	<span class="comment">//外层循环控制趟数，总趟数为len-1</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++)          </span><br><span class="line">		<span class="comment">//内层循环为当前i趟数 所需要比较的次数</span></span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; len - <span class="number">1</span> - i; j++)  </span><br><span class="line">            <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>])  </span><br><span class="line">                swap(arr[j], arr[j + <span class="number">1</span>]);          </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-快速排序（使用最常见的排序算法）"><a href="#1-快速排序（使用最常见的排序算法）" class="headerlink" title="1.快速排序（使用最常见的排序算法）"></a>1.快速排序（使用最常见的排序算法）</h2><h4 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h4><ul>
 <li>快速排序是一个分治思想，平均复杂度是n*lg(n)。</li>
 </ul>
 <p><strong>Divide</strong>：数组A[p..r]分为两个子数组A[p..q-1],A[q+1..r]，使得A[p..q-1]上所有元素小于A[q];A[q+1..r]上所有的元素都大于A[q]。<br><strong>Conquer</strong>：通过对快排的递归，对两个子数组A[p..q-1]和A[q+1..r]进行排序。<br><strong>Combine</strong>：分完就已经有序。</p>
@@ -438,7 +440,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -485,7 +487,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-快速排序（使用最常见的排序算法）"><span class="nav-number">1.</span> <span class="nav-text">1.快速排序（使用最常见的排序算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法分析"><span class="nav-number">1.0.1.</span> <span class="nav-text">算法分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现"><span class="nav-number">1.0.2.</span> <span class="nav-text">实现</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#2-插入排序"><span class="nav-number">2.</span> <span class="nav-text">2.插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法分析-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">算法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实现-1"><span class="nav-number">2.0.1.1.</span> <span class="nav-text">实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-并归排序"><span class="nav-number">3.</span> <span class="nav-text">3.并归排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法分析-2"><span class="nav-number">3.0.1.</span> <span class="nav-text">算法分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现-2"><span class="nav-number">3.0.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-计数排序"><span class="nav-number">4.</span> <span class="nav-text">4.计数排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法分析-3"><span class="nav-number">4.0.1.</span> <span class="nav-text">算法分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现-3"><span class="nav-number">4.0.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-基数排序"><span class="nav-number">5.</span> <span class="nav-text">5.基数排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法分析-4"><span class="nav-number">5.0.1.</span> <span class="nav-text">算法分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现-4"><span class="nav-number">5.0.2.</span> <span class="nav-text">实现</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-冒泡排序"><span class="nav-number">1.</span> <span class="nav-text">0. 冒泡排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-快速排序（使用最常见的排序算法）"><span class="nav-number">2.</span> <span class="nav-text">1.快速排序（使用最常见的排序算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法分析"><span class="nav-number">2.0.1.</span> <span class="nav-text">算法分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现"><span class="nav-number">2.0.2.</span> <span class="nav-text">实现</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#2-插入排序"><span class="nav-number">3.</span> <span class="nav-text">2.插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法分析-1"><span class="nav-number">3.0.1.</span> <span class="nav-text">算法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实现-1"><span class="nav-number">3.0.1.1.</span> <span class="nav-text">实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-并归排序"><span class="nav-number">4.</span> <span class="nav-text">3.并归排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法分析-2"><span class="nav-number">4.0.1.</span> <span class="nav-text">算法分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现-2"><span class="nav-number">4.0.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-计数排序"><span class="nav-number">5.</span> <span class="nav-text">4.计数排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法分析-3"><span class="nav-number">5.0.1.</span> <span class="nav-text">算法分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现-3"><span class="nav-number">5.0.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-基数排序"><span class="nav-number">6.</span> <span class="nav-text">5.基数排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法分析-4"><span class="nav-number">6.0.1.</span> <span class="nav-text">算法分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现-4"><span class="nav-number">6.0.2.</span> <span class="nav-text">实现</span></a></li></ol></li></div>
             
 
           </div>

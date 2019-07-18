@@ -232,6 +232,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/Linux信号的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陆标">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝花夕拾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/18/Linux信号的使用/" itemprop="url">Linux信号的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T22:07:20+08:00">
+                2019-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><ul>
+<li>信号时软件中断，一种处理异步事件的方法，每个信号都有一个名字，这些名字都是以SIG开头。</li>
+<li>产生信号的条件有很多种：<br>  1、当用户按下终端按键时，引发终端产生的信号。Ctrl+C等。<br>  2、 硬件产生信号，除了0、无效内存。<br>  3、进程被调用了kill函数。<br>  4、检测到了某个软件条件。比如SIGURG(网络链接传来数据)、SIGPIPE（在管道读进程已经终止）、SIGALRM(设置的定时器超时)。</li>
+</ul>
+<h2 id="信号的使用"><a href="#信号的使用" class="headerlink" title="信号的使用"></a>信号的使用</h2><ul>
+<li><p>最简单的接口是singnal，但signal的函数原型太复杂，可以使用下面的typedef，可以更简单一些。第一个参数signo是信号名，是接收到此信号的时候，要调用的函数地址（包括：SIG_IGN ：忽略系统动作,SIG_DFL :系统默认动作, ）:</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="keyword">void</span> <span class="title">Sigfunc</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function">Sigfunc *  <span class="title">signal</span><span class="params">(<span class="keyword">int</span> , Sigfunc *)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//信号处理函数</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sig_usr</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span> )</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(signal(SIGUSR1,sig_usr) == SIG_ERR)&#123;</span><br><span class="line">		err_sys(<span class="string">"can't  catch  err!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	pause();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  我们在在终端使用：kill USR1 (pid)<br>  进程就会接收到SIG_USR1信号。<br>  signal的缺点：不改变信号的处理方式，就不能确定信号的当前处理方式。而sigaction函数则可以确定一个信号的处理方式，无需改变它。</p>
+</li>
+</ul>
+<ul>
+<li>在早期的时候进程信号可能存在丢失的情况，同时，系统对信号的控制能力也很差，系统通常不具备信号的阻塞能力。后来通过捕捉到信号后，设置信号已经发生的标志位的方式，来进行判断信号是否丢失。</li>
+<li>当产生一个信号时，事件可以时硬件异常（除以0）、软件异常（定时器超时）、终端信号、kill函数的发生，内核会在进程中以某种形式设置一个标志。当信号传递过程中，我么称之为信号是未决的。如果有多个信号传给一个进程，PoSIX并没有规定它的顺序。</li>
+</ul>
+<h2 id="发送信号相关的函数"><a href="#发送信号相关的函数" class="headerlink" title="发送信号相关的函数"></a>发送信号相关的函数</h2><ul>
+<li><p>kill和raise。kill将信号发送给进程和进程组，raise函数允许进程向着自身发送信号。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//调用</span></span><br><span class="line">raise(signo );</span><br><span class="line"><span class="comment">//等同于调用,pid &gt; 0 ，信号给到ID为pid的进程；pid==0，信号给到同组所有进程。</span></span><br><span class="line">kill(getpid(), signo);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>alarm和pause，alarm函数可设置一个定时器，产生SIGALRM信号，pause函数会使得进程一直挂起，直到捕捉到一个信号。longjmp无法很好的处理信号间的竞争，可选择select和poll函数。</p>
+</li>
+<li><p>sigaction函数是检查或者修改与指定信号相关的处理动作。sigsetjmp和siglongjmp用于非局部转移，常调用longjmp回到主循环中。</p>
+</li>
+<li><p>sigsuspend：用于解除信号阻塞后，被推迟响应的情况。先恢复被屏蔽字，然后重新进入休眠。</p>
+</li>
+<li><p>abort：使得程序异常的终止。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/Linux进程关系/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1128,7 +1275,9 @@
       
         
           
-            <h2 id="1-快速排序（使用最常见的排序算法）"><a href="#1-快速排序（使用最常见的排序算法）" class="headerlink" title="1.快速排序（使用最常见的排序算法）"></a>1.快速排序（使用最常见的排序算法）</h2><h4 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h4><ul>
+            <h2 id="0-冒泡排序"><a href="#0-冒泡排序" class="headerlink" title="0. 冒泡排序"></a>0. 冒泡排序</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubble_sort</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> len)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i, j;  </span><br><span class="line">	<span class="comment">//外层循环控制趟数，总趟数为len-1</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++)          </span><br><span class="line">		<span class="comment">//内层循环为当前i趟数 所需要比较的次数</span></span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; len - <span class="number">1</span> - i; j++)  </span><br><span class="line">            <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>])  </span><br><span class="line">                swap(arr[j], arr[j + <span class="number">1</span>]);          </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-快速排序（使用最常见的排序算法）"><a href="#1-快速排序（使用最常见的排序算法）" class="headerlink" title="1.快速排序（使用最常见的排序算法）"></a>1.快速排序（使用最常见的排序算法）</h2><h4 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h4><ul>
 <li>快速排序是一个分治思想，平均复杂度是n*lg(n)。</li>
 </ul>
 <p><strong>Divide</strong>：数组A[p..r]分为两个子数组A[p..q-1],A[q+1..r]，使得A[p..q-1]上所有元素小于A[q];A[q+1..r]上所有的元素都大于A[q]。<br><strong>Conquer</strong>：通过对快排的递归，对两个子数组A[p..q-1]和A[q+1..r]进行排序。<br><strong>Combine</strong>：分完就已经有序。</p>
@@ -1321,6 +1470,131 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/18/C++分割字符串/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陆标">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝花夕拾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/18/C++分割字符串/" itemprop="url">C++常用函数实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-18T17:15:47+08:00">
+                2019-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="分割字符串"><a href="#分割字符串" class="headerlink" title="分割字符串"></a>分割字符串</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;  split(<span class="built_in">string</span> line,<span class="built_in">string</span> pattern)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> pos;</span><br><span class="line">	<span class="comment">//最后加一个分割符</span></span><br><span class="line">	line +=pattern;</span><br><span class="line">	<span class="comment">//得到长度</span></span><br><span class="line">	<span class="keyword">int</span> len=line.size();</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; result;</span><br><span class="line">	<span class="comment">//遍历每隔字符</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt;len;i++)&#123;</span><br><span class="line">		<span class="comment">//寻找分割符所在的位置</span></span><br><span class="line">		pos = line.find(pattern,i);</span><br><span class="line">		<span class="comment">//当前位置不是超限位置</span></span><br><span class="line">		<span class="keyword">if</span>(pos &lt; len)&#123;</span><br><span class="line">			<span class="comment">//取得子字符串，注意substr参数是当前索引到索引后的多少个字符</span></span><br><span class="line">			<span class="built_in">string</span> piece = line.substr(i,pos-i);</span><br><span class="line">			result.push_back(piece);</span><br><span class="line">			<span class="comment">//重新将当前索引定位到子字符串的最后位置</span></span><br><span class="line">			i = pos+pattern.size()<span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在进程中获取Linux终端的返回字"><a href="#在进程中获取Linux终端的返回字" class="headerlink" title="在进程中获取Linux终端的返回字"></a>在进程中获取Linux终端的返回字</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//用于输入shell语句后得到返回的值，输入为终端命令</span></span><br><span class="line"><span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">exec</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* cmd)</span> </span>&#123;</span><br><span class="line">    FILE* pipe = popen(cmd, <span class="string">"r"</span>);</span><br><span class="line">    <span class="keyword">if</span> (!pipe) <span class="keyword">return</span> <span class="string">"ERROR"</span>;</span><br><span class="line">    <span class="keyword">char</span> buffer[<span class="number">128</span>];</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> result = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">while</span>(!feof(pipe)) &#123;</span><br><span class="line">        <span class="keyword">if</span>(fgets(buffer, <span class="number">128</span>, pipe) != <span class="literal">NULL</span>)</span><br><span class="line">            result += buffer;</span><br><span class="line">    &#125;</span><br><span class="line">    pclose(pipe);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="检查文件夹是否存在，输入为路径"><a href="#检查文件夹是否存在，输入为路径" class="headerlink" title="检查文件夹是否存在，输入为路径"></a>检查文件夹是否存在，输入为路径</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">checkFile</span><span class="params">(<span class="built_in">string</span> path)</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::fstream _file;</span><br><span class="line">    _file.open(path.c_str(),ios::in);</span><br><span class="line">    <span class="keyword">if</span>(!_file)&#123;</span><br><span class="line">    	<span class="comment">//不存在</span></span><br><span class="line">    	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    	<span class="comment">//已经创建</span></span><br><span class="line">    	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1367,7 +1641,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
