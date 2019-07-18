@@ -232,6 +232,142 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/Linux进程关系/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陆标">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝花夕拾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/18/Linux进程关系/" itemprop="url">Linux进程关系</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T11:37:37+08:00">
+                2019-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="终端登陆"><a href="#终端登陆" class="headerlink" title="终端登陆"></a>终端登陆</h2><ul>
+<li>Linux采用了管理文件方式，在/etc/inittab中包含了了配置信息，指定了init应该启动的终端设备。</li>
+<li>而在Ubuntu发行中，，使用放在/etc/init的*.conf命名的配置文件中。</li>
+</ul>
+<h2 id="网络登陆"><a href="#网络登陆" class="headerlink" title="网络登陆"></a>网络登陆</h2><ul>
+<li>Linux网络登陆与BSD基本相同，使用xinetd，等待大多数的网络连接。首先，init调用一个shell，使得其执行/etc/rc，由此启动守护进程xinetd,xinetd等待TCP/IP的链接，每次一个服务请求到达，执行一次fork，产生一个进程。</li>
+<li>etc/init文件夹中存放的是用于自启动的脚本文件。rc1~6存放的是系统初始化时，不同的启动等级的配置文件。<h2 id="进程组"><a href="#进程组" class="headerlink" title="进程组"></a>进程组</h2></li>
+<li>每个进程有一个进程ID以外，还属于一个进程组，每个进程组都有自己独立的ID号。</li>
+<li>进程组组长的ID就是进程组的ID，组长可以创建一个进程组和进程，只要进程组中还有进程存在，进程组就存在，与组长是否存在无关。</li>
+<li>子进程可以调用exec函数，获得独立，离开进程组的管理。<h2 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h2></li>
+<li>会话是一个或者多个进程的集合，子进程创建会话会发生：1、该进程会变成会话的首进程。2、该进程成为新的进程组的组长进程。3、该进程将没有控制终端。</li>
+<li>会话首进程ID会被视作会话的ID。</li>
+<li>使用setsid创建新的会话。使用getsid得到会话ID。<h2 id="控制终端"><a href="#控制终端" class="headerlink" title="控制终端"></a>控制终端</h2></li>
+<li>建立与控制终端链接的会话称为控制进程。</li>
+<li>一个会话中的几个进程可以被称之为一个前台进程和多个后台进程。</li>
+<li>有三个特殊字符可以控制终端驱动程序产生特殊的信号：<br>  1、Delete或者Ctrl+C    ： 产生中断SIGINT。<br>  2、Ctrl+\        :退出字符，产生SIGQUIT。<br>  3、Ctrl+Z            ：挂起字符，产生SIGSTP。</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/Linux进程的终止/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1231,7 +1367,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

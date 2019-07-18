@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="推挽输出与开漏输出的区别 推挽电路可以输出高低电平，连接数字器件，又两个三极管电路组成，每次只导通一个。 开漏输出相当于输出直接接到三极管的集电极，需要接上拉电阻使用，适合做电流型驱动，有较大的吸入电流的能力。定时器的功能以及优势 单片机的中定时器主要作用是用于计数，一次计数就是一个时钟周期，可以用于中断、延时计算、脉冲发送、脉冲检测等。具有稳定好、易于使用的优势，同时中断和定时器的使用极大减小了">
+<meta name="description" content="终端登陆 Linux采用了管理文件方式，在/etc/inittab中包含了了配置信息，指定了init应该启动的终端设备。 而在Ubuntu发行中，，使用放在/etc/init的*.conf命名的配置文件中。  网络登陆 Linux网络登陆与BSD基本相同，使用xinetd，等待大多数的网络连接。首先，init调用一个shell，使得其执行/etc/rc，由此启动守护进程xinetd,xinetd等">
 <meta property="og:type" content="article">
-<meta property="og:title" content="单片机基础">
-<meta property="og:url" content="http://yoursite.com/2019/07/16/单片机基础/index.html">
+<meta property="og:title" content="Linux进程关系">
+<meta property="og:url" content="http://yoursite.com/2019/07/18/Linux进程关系/index.html">
 <meta property="og:site_name" content="朝花夕拾">
-<meta property="og:description" content="推挽输出与开漏输出的区别 推挽电路可以输出高低电平，连接数字器件，又两个三极管电路组成，每次只导通一个。 开漏输出相当于输出直接接到三极管的集电极，需要接上拉电阻使用，适合做电流型驱动，有较大的吸入电流的能力。定时器的功能以及优势 单片机的中定时器主要作用是用于计数，一次计数就是一个时钟周期，可以用于中断、延时计算、脉冲发送、脉冲检测等。具有稳定好、易于使用的优势，同时中断和定时器的使用极大减小了">
+<meta property="og:description" content="终端登陆 Linux采用了管理文件方式，在/etc/inittab中包含了了配置信息，指定了init应该启动的终端设备。 而在Ubuntu发行中，，使用放在/etc/init的*.conf命名的配置文件中。  网络登陆 Linux网络登陆与BSD基本相同，使用xinetd，等待大多数的网络连接。首先，init调用一个shell，使得其执行/etc/rc，由此启动守护进程xinetd,xinetd等">
 <meta property="og:locale" content="简体汉语">
-<meta property="og:updated_time" content="2019-07-16T05:08:19.359Z">
+<meta property="og:updated_time" content="2019-07-18T03:38:15.898Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="单片机基础">
-<meta name="twitter:description" content="推挽输出与开漏输出的区别 推挽电路可以输出高低电平，连接数字器件，又两个三极管电路组成，每次只导通一个。 开漏输出相当于输出直接接到三极管的集电极，需要接上拉电阻使用，适合做电流型驱动，有较大的吸入电流的能力。定时器的功能以及优势 单片机的中定时器主要作用是用于计数，一次计数就是一个时钟周期，可以用于中断、延时计算、脉冲发送、脉冲检测等。具有稳定好、易于使用的优势，同时中断和定时器的使用极大减小了">
+<meta name="twitter:title" content="Linux进程关系">
+<meta name="twitter:description" content="终端登陆 Linux采用了管理文件方式，在/etc/inittab中包含了了配置信息，指定了init应该启动的终端设备。 而在Ubuntu发行中，，使用放在/etc/init的*.conf命名的配置文件中。  网络登陆 Linux网络登陆与BSD基本相同，使用xinetd，等待大多数的网络连接。首先，init调用一个shell，使得其执行/etc/rc，由此启动守护进程xinetd,xinetd等">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/16/单片机基础/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/18/Linux进程关系/">
 
 
 
 
 
-  <title>单片机基础 | 朝花夕拾</title>
+  <title>Linux进程关系 | 朝花夕拾</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/单片机基础/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/Linux进程关系/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="陆标">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">单片机基础</h1>
+          <h1 class="post-title" itemprop="name headline">Linux进程关系</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-16T13:05:46+08:00">
-                2019-07-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T11:37:37+08:00">
+                2019-07-18
               </time>
             
 
@@ -299,12 +299,22 @@
       
 
       
-        <h2 id="推挽输出与开漏输出的区别"><a href="#推挽输出与开漏输出的区别" class="headerlink" title="推挽输出与开漏输出的区别"></a>推挽输出与开漏输出的区别</h2><ul>
-<li>推挽电路可以输出高低电平，连接数字器件，又两个三极管电路组成，每次只导通一个。</li>
-<li>开漏输出相当于输出直接接到三极管的集电极，需要接上拉电阻使用，适合做电流型驱动，有较大的吸入电流的能力。<h2 id="定时器的功能以及优势"><a href="#定时器的功能以及优势" class="headerlink" title="定时器的功能以及优势"></a>定时器的功能以及优势</h2></li>
-<li>单片机的中定时器主要作用是用于计数，一次计数就是一个时钟周期，可以用于中断、延时计算、脉冲发送、脉冲检测等。具有稳定好、易于使用的优势，同时中断和定时器的使用极大减小了CPU的负担。<h2 id="异步通信与同步通信的区别"><a href="#异步通信与同步通信的区别" class="headerlink" title="异步通信与同步通信的区别"></a>异步通信与同步通信的区别</h2>同步通信与异步通信区别：<br>1、同步通信要求接收端时钟频率和发送端时钟频率一致，发送端发送连续的比特流；异步通信时不要求接收端时钟和发送端时钟同步，发送端发送完一个字节后，可经过任意长的时间间隔再发送下一个字节。<br>2、同步通信效率高，异步通信效率较低。<br>3、同步通信较复杂，双方时钟的允许误差较小；异步通信简单，双方时钟可允许一定误差。<br>4、同步通信可用于点对多点，异步通信只适用于点对点。<h2 id="I2c通信过程"><a href="#I2c通信过程" class="headerlink" title="I2c通信过程"></a>I2c通信过程</h2>1、主机发起第一次通信，将读指令和寄存器Y的地址写入从机<br>2、从机将读指令和地址解析出来，并将地址中的内容存到从机输出buffer<br>3、主机再次与从机通信读取数据内容<h2 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h2></li>
-<li>中断是指在计算机运行过程中遇到外部信号，需要主机干预时，主机会停下主程序的运行，进入中断程序，处理新的情况，处理完毕后，再继续执行主程序。</li>
-<li>中断服务函数需要注意以下几点：<br>1、不能返回值。中断服务函数的调用是硬件级别的，当中断产生，pc指针强制跳转到对应的中断服务函数入口，进入中断具有随机性，并不是某段代码对其进行调用，那么如果有返回值它的返回值返回给谁?显然这个返回值毫无意义，如果有返回值，它必定需要进行压栈操作，这样一来何时出栈怎么出栈将变得无法解决。<br>2、不能向ISR（中断服务函数）传递参数。因为函数传递参数必定会要求压栈出栈操作，由于进入中断服务函数的随机行，谁给它传递参数都成问题<br>3、ISR（中断服务函数）​尽可能的短小。中断时间如果过长会影响其他中断的接收响应。<br>4、不能使用printf（）打印。由于printf之类的glibc函数采用的是缓冲机制，这个缓冲区是共享的，相当于一个全局变量，第一层中断来时，它向缓冲里面写入一些部分内容，恰好这时来了个优先级更高的中断，它同样调用了printf，也向缓冲里面写入一些内容，这样缓冲区的内容就错乱了。<h2 id="对寄存器某位置0或置1、"><a href="#对寄存器某位置0或置1、" class="headerlink" title="对寄存器某位置0或置1、"></a>对寄存器某位置0或置1、</h2>a |= 1 &lt;&lt; 6        //置1<br>a &amp;= ~(1 &lt;&lt; 6)        //置0​</li>
+        <h2 id="终端登陆"><a href="#终端登陆" class="headerlink" title="终端登陆"></a>终端登陆</h2><ul>
+<li>Linux采用了管理文件方式，在/etc/inittab中包含了了配置信息，指定了init应该启动的终端设备。</li>
+<li>而在Ubuntu发行中，，使用放在/etc/init的*.conf命名的配置文件中。</li>
+</ul>
+<h2 id="网络登陆"><a href="#网络登陆" class="headerlink" title="网络登陆"></a>网络登陆</h2><ul>
+<li>Linux网络登陆与BSD基本相同，使用xinetd，等待大多数的网络连接。首先，init调用一个shell，使得其执行/etc/rc，由此启动守护进程xinetd,xinetd等待TCP/IP的链接，每次一个服务请求到达，执行一次fork，产生一个进程。</li>
+<li>etc/init文件夹中存放的是用于自启动的脚本文件。rc1~6存放的是系统初始化时，不同的启动等级的配置文件。<h2 id="进程组"><a href="#进程组" class="headerlink" title="进程组"></a>进程组</h2></li>
+<li>每个进程有一个进程ID以外，还属于一个进程组，每个进程组都有自己独立的ID号。</li>
+<li>进程组组长的ID就是进程组的ID，组长可以创建一个进程组和进程，只要进程组中还有进程存在，进程组就存在，与组长是否存在无关。</li>
+<li>子进程可以调用exec函数，获得独立，离开进程组的管理。<h2 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h2></li>
+<li>会话是一个或者多个进程的集合，子进程创建会话会发生：1、该进程会变成会话的首进程。2、该进程成为新的进程组的组长进程。3、该进程将没有控制终端。</li>
+<li>会话首进程ID会被视作会话的ID。</li>
+<li>使用setsid创建新的会话。使用getsid得到会话ID。<h2 id="控制终端"><a href="#控制终端" class="headerlink" title="控制终端"></a>控制终端</h2></li>
+<li>建立与控制终端链接的会话称为控制进程。</li>
+<li>一个会话中的几个进程可以被称之为一个前台进程和多个后台进程。</li>
+<li>有三个特殊字符可以控制终端驱动程序产生特殊的信号：<br>  1、Delete或者Ctrl+C    ： 产生中断SIGINT。<br>  2、Ctrl+\        :退出字符，产生SIGQUIT。<br>  3、Ctrl+Z            ：挂起字符，产生SIGSTP。</li>
 </ul>
 
       
@@ -330,8 +340,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/16/小游戏2（德州扑克C++）/" rel="next" title="小游戏2（德州扑克C++）">
-                <i class="fa fa-chevron-left"></i> 小游戏2（德州扑克C++）
+              <a href="/2019/07/16/Linux进程的终止/" rel="next" title="Linux进程的终止">
+                <i class="fa fa-chevron-left"></i> Linux进程的终止
               </a>
             
           </div>
@@ -339,10 +349,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/16/Windows权限配置/" rel="prev" title="Windows权限配置">
-                Windows权限配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -466,7 +472,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#推挽输出与开漏输出的区别"><span class="nav-number">1.</span> <span class="nav-text">推挽输出与开漏输出的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时器的功能以及优势"><span class="nav-number">2.</span> <span class="nav-text">定时器的功能以及优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步通信与同步通信的区别"><span class="nav-number">3.</span> <span class="nav-text">异步通信与同步通信的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I2c通信过程"><span class="nav-number">4.</span> <span class="nav-text">I2c通信过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中断"><span class="nav-number">5.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对寄存器某位置0或置1、"><span class="nav-number">6.</span> <span class="nav-text">对寄存器某位置0或置1、</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#终端登陆"><span class="nav-number">1.</span> <span class="nav-text">终端登陆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络登陆"><span class="nav-number">2.</span> <span class="nav-text">网络登陆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程组"><span class="nav-number">3.</span> <span class="nav-text">进程组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#会话"><span class="nav-number">4.</span> <span class="nav-text">会话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制终端"><span class="nav-number">5.</span> <span class="nav-text">控制终端</span></a></li></ol></div>
             
 
           </div>
