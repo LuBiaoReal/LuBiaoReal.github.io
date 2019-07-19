@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="概要 信号是软件中断，一种处理异步事件的方法，每个信号都有一个名字，这些名字都是以SIG开头。 产生信号的条件有很多种：  1、当用户按下终端按键时，引发终端产生的信号。Ctrl+C等。  2、 硬件产生信号，除了0、无效内存。  3、进程被调用了kill函数。  4、检测到了某个软件条件。比如SIGURG(网络链接传来数据)、SIGPIPE（在管道读进程已经终止）、SIGALRM(设置的定时器超">
+<meta name="description" content="各个数据类型比较 16位编译器char ：1个字节char*(即指针变量): 2个字节short int : 2个字节int：  2个字节unsigned int : 2个字节float:  4个字节double:   8个字节long:   4个字节long long:  8个字节unsigned long:  4个字节   32位编译器char ：1个字节char*（即指针变量）: 4个字节（">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux信号的使用">
-<meta property="og:url" content="http://yoursite.com/2019/07/18/Linux信号的使用/index.html">
+<meta property="og:title" content="不同编译器下各个数据类型字节长度">
+<meta property="og:url" content="http://yoursite.com/2019/06/19/不同编译器下各个数据类型字节长度/index.html">
 <meta property="og:site_name" content="朝花夕拾">
-<meta property="og:description" content="概要 信号是软件中断，一种处理异步事件的方法，每个信号都有一个名字，这些名字都是以SIG开头。 产生信号的条件有很多种：  1、当用户按下终端按键时，引发终端产生的信号。Ctrl+C等。  2、 硬件产生信号，除了0、无效内存。  3、进程被调用了kill函数。  4、检测到了某个软件条件。比如SIGURG(网络链接传来数据)、SIGPIPE（在管道读进程已经终止）、SIGALRM(设置的定时器超">
+<meta property="og:description" content="各个数据类型比较 16位编译器char ：1个字节char*(即指针变量): 2个字节short int : 2个字节int：  2个字节unsigned int : 2个字节float:  4个字节double:   8个字节long:   4个字节long long:  8个字节unsigned long:  4个字节   32位编译器char ：1个字节char*（即指针变量）: 4个字节（">
 <meta property="og:locale" content="简体汉语">
-<meta property="og:updated_time" content="2019-07-19T02:24:59.114Z">
+<meta property="og:updated_time" content="2019-07-19T03:43:30.224Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux信号的使用">
-<meta name="twitter:description" content="概要 信号是软件中断，一种处理异步事件的方法，每个信号都有一个名字，这些名字都是以SIG开头。 产生信号的条件有很多种：  1、当用户按下终端按键时，引发终端产生的信号。Ctrl+C等。  2、 硬件产生信号，除了0、无效内存。  3、进程被调用了kill函数。  4、检测到了某个软件条件。比如SIGURG(网络链接传来数据)、SIGPIPE（在管道读进程已经终止）、SIGALRM(设置的定时器超">
+<meta name="twitter:title" content="不同编译器下各个数据类型字节长度">
+<meta name="twitter:description" content="各个数据类型比较 16位编译器char ：1个字节char*(即指针变量): 2个字节short int : 2个字节int：  2个字节unsigned int : 2个字节float:  4个字节double:   8个字节long:   4个字节long long:  8个字节unsigned long:  4个字节   32位编译器char ：1个字节char*（即指针变量）: 4个字节（">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/18/Linux信号的使用/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/19/不同编译器下各个数据类型字节长度/">
 
 
 
 
 
-  <title>Linux信号的使用 | 朝花夕拾</title>
+  <title>不同编译器下各个数据类型字节长度 | 朝花夕拾</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/Linux信号的使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/19/不同编译器下各个数据类型字节长度/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="陆标">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux信号的使用</h1>
+          <h1 class="post-title" itemprop="name headline">不同编译器下各个数据类型字节长度</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T22:07:20+08:00">
-                2019-07-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T11:43:02+08:00">
+                2019-06-19
               </time>
             
 
@@ -299,34 +299,19 @@
       
 
       
-        <h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><ul>
-<li>信号是软件中断，一种处理异步事件的方法，每个信号都有一个名字，这些名字都是以SIG开头。</li>
-<li>产生信号的条件有很多种：<br>  1、当用户按下终端按键时，引发终端产生的信号。Ctrl+C等。<br>  2、 硬件产生信号，除了0、无效内存。<br>  3、进程被调用了kill函数。<br>  4、检测到了某个软件条件。比如SIGURG(网络链接传来数据)、SIGPIPE（在管道读进程已经终止）、SIGALRM(设置的定时器超时)。</li>
+        <h2 id="各个数据类型比较"><a href="#各个数据类型比较" class="headerlink" title="各个数据类型比较"></a>各个数据类型比较</h2><ul>
+<li>16位编译器<br>char ：1个字节<br>char*(即指针变量): 2个字节<br>short int : 2个字节<br>int：  2个字节<br>unsigned int : 2个字节<br>float:  4个字节<br>double:   8个字节<br>long:   4个字节<br>long long:  8个字节<br>unsigned long:  4个字节</li>
 </ul>
-<h2 id="信号的使用"><a href="#信号的使用" class="headerlink" title="信号的使用"></a>信号的使用</h2><ul>
-<li><p>最简单的接口是singnal，但signal的函数原型太复杂，可以使用下面的typedef，可以更简单一些。第一个参数signo是信号名，是接收到此信号的时候，要调用的函数地址（包括：SIG_IGN ：忽略系统动作,SIG_DFL :系统默认动作, ）:</p>
-  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="keyword">void</span> <span class="title">Sigfunc</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function">Sigfunc *  <span class="title">signal</span><span class="params">(<span class="keyword">int</span> , Sigfunc *)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//信号处理函数</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sig_usr</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span> )</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(signal(SIGUSR1,sig_usr) == SIG_ERR)&#123;</span><br><span class="line">		err_sys(<span class="string">"can't  catch  err!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	pause();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>  我们在在终端使用：kill USR1 (pid)<br>  进程就会接收到SIG_USR1信号。<br>  signal的缺点：不改变信号的处理方式，就不能确定信号的当前处理方式。而sigaction函数则可以确定一个信号的处理方式，无需改变它。</p>
+<ul>
+<li><p>32位编译器<br>char ：1个字节<br>char*（即指针变量）: 4个字节（32位的寻址空间是2^32, 即32个bit，也就是4个字节。同理64位编译器）<br>short int : 2个字节<br>int：  4个字节<br>unsigned int : 4个字节<br>float:  4个字节<br>double:   8个字节<br>long:   4个字节<br>long long:  8个字节<br>unsigned long:  4个字节</p>
+</li>
+<li><p>64位编译器<br>char ：1个字节<br>char*(即指针变量): 8个字节<br>short int : 2个字节<br>int：  4个字节<br>unsigned int : 4个字节<br>float:  4个字节<br>double:   8个字节<br>long:   8个字节<br>long long:  8个字节<br>unsigned long:  8个字节</p>
 </li>
 </ul>
 <ul>
-<li>在早期的时候进程信号可能存在丢失的情况，同时，系统对信号的控制能力也很差，系统通常不具备信号的阻塞能力。后来通过捕捉到信号后，设置信号已经发生的标志位的方式，来进行判断信号是否丢失。</li>
-<li>当产生一个信号时，事件可以时硬件异常（除以0）、软件异常（定时器超时）、终端信号、kill函数的发生，内核会在进程中以某种形式设置一个标志。当信号传递过程中，我么称之为信号是未决的。如果有多个信号传给一个进程，PoSIX并没有规定它的顺序。</li>
+<li>后缀：<br>当位long型的时候，尽量使用做后缀<br>24ULL：unsigned long long<br>u8：utf8<br>u：16位<br>U：32位</li>
 </ul>
-<h2 id="发送信号相关的函数"><a href="#发送信号相关的函数" class="headerlink" title="发送信号相关的函数"></a>发送信号相关的函数</h2><ul>
-<li><p>kill和raise。kill将信号发送给进程和进程组，raise函数允许进程向着自身发送信号。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//调用</span></span><br><span class="line">raise(signo );</span><br><span class="line"><span class="comment">//等同于调用,pid &gt; 0 ，信号给到ID为pid的进程；pid==0，信号给到同组所有进程。</span></span><br><span class="line">kill(getpid(), signo);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>alarm和pause，alarm函数可设置一个定时器，产生SIGALRM信号，pause函数会使得进程一直挂起，直到捕捉到一个信号。longjmp无法很好的处理信号间的竞争，可选择select和poll函数。</p>
-</li>
-<li><p>sigaction函数是检查或者修改与指定信号相关的处理动作。sigsetjmp和siglongjmp用于非局部转移，常调用longjmp回到主循环中。</p>
-</li>
-<li><p>sigsuspend：用于解除信号阻塞后，被推迟响应的情况。先恢复被屏蔽字，然后重新进入休眠。</p>
-</li>
-<li><p>abort：使得程序异常的终止。</p>
-</li>
-</ul>
+<p>3.1415926L：long double</p>
 
       
     </div>
@@ -351,8 +336,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/18/Linux进程关系/" rel="next" title="Linux进程关系">
-                <i class="fa fa-chevron-left"></i> Linux进程关系
+              <a href="/2019/06/19/C-中const详解/" rel="next" title="C++中const详解">
+                <i class="fa fa-chevron-left"></i> C++中const详解
               </a>
             
           </div>
@@ -360,6 +345,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/29/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -483,7 +472,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概要"><span class="nav-number">1.</span> <span class="nav-text">概要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号的使用"><span class="nav-number">2.</span> <span class="nav-text">信号的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送信号相关的函数"><span class="nav-number">3.</span> <span class="nav-text">发送信号相关的函数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#各个数据类型比较"><span class="nav-number">1.</span> <span class="nav-text">各个数据类型比较</span></a></li></ol></div>
             
 
           </div>

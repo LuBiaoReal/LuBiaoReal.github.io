@@ -232,6 +232,163 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/19/C-中const详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陆标">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝花夕拾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/19/C-中const详解/" itemprop="url">C++中const详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T11:15:06+08:00">
+                2019-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1、与define的区别"><a href="#1、与define的区别" class="headerlink" title="1、与define的区别"></a>1、与define的区别</h2><p>具体来说，有以下几方面的区别：</p>
+<ul>
+<li><p>编译器处理方式<br>define – 在预处理阶段进行替换<br>const – 在编译时确定其值</p>
+</li>
+<li><p>类型检查<br>define – 无类型，不进行类型安全检查，可能会产生意想不到的错误<br>const – 有数据类型，编译时会进行类型检查</p>
+</li>
+<li><p>内存空间<br>define – 不分配内存，给出的是立即数，有多少次使用就进行多少次替换，在内存中会有多个拷贝，消耗内存大<br>const – 在静态存储区中分配空间，在程序运行过程中内存中只有一个拷贝</p>
+</li>
+<li><p>其他<br>在编译时， 编译器通常不为const常量分配存储空间，而是将它们保存在符号表中，这使得它成为一个编译期间的常量，没有了存储与读内存的操作，使得它的效率也很高。<br>宏替换只作替换，不做计算，不做表达式求解。</p>
+</li>
+</ul>
+<p>宏定义的作用范围仅限于当前文件。<br>默认状态下，const对象只在文件内有效，当多个文件中出现了同名的const变量时，等同于在不同文件中分别定义了独立的变量。<br>如果想在多个文件之间共享const对象，必须在变量定义之前添加extern关键字（在声明和定义时都要加）。</p>
+<hr>
+<p>作者：狮子HH<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/yingyujianmo/article/details/51206460" target="_blank" rel="noopener">https://blog.csdn.net/yingyujianmo/article/details/51206460</a> </p>
+<h2 id="2、const的基础用法"><a href="#2、const的基础用法" class="headerlink" title="2、const的基础用法"></a>2、const的基础用法</h2><ul>
+<li><p>使用全局的const变量：<br>在c.h中声明：extern const int I;<br>在c.cpp中定义:extern const int I= 10;</p>
+</li>
+<li><p>引用：<br>1、不能把一个const引用给一个非const引用：<br>const int i=0;<br>const int &amp;j=I;<br>//这是错误的<br>2、不能直接更改const 引用的值，但可以改引用对象的值</p>
+</li>
+<li><p><em>对于类中的const成员变量必须通过初始化列表进行初始化*</em></p>
+</li>
+</ul>
+<ul>
+<li><p>C++声明应该从右边往左边看</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> errNum=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> *<span class="keyword">const</span> curErr=&amp;errNuml;</span><br><span class="line"><span class="comment">//上面就是一个“指向int对象的const指针，const指针不能被修改，所以必须在定义的时候就初始化。</span></span><br><span class="line"><span class="keyword">int</span> errNum=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span>* curErr=&amp;errNuml;</span><br><span class="line"><span class="comment">//上面是“指向const对象的指针“，可以把非const对象赋值给这个指针，这样可以通过修改指针指向对象的值，而不能修改const对象指针</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>如果const位于星号的左侧，则const就是用来修饰指针所指向的变量，即指针指向的对象为常量；如果const位于星号的右侧，const就是修饰指针本身，即指针本身是常量。</strong>，如：<br>cont int val=0;<br>int const * i = &val;        //如果val不为const，也可以，但<em>i是可以修改的。<br>而：<br>int err=0;<br>int *const cur=&err;        //表示是cur的地址是固定的，err的内容和</em>cur都可以改</p>
+</li>
+</ul>
+<p>在一个类中，任何不会修改数据成员的函数都应该声明为const类型。如果在编写const成员函数时，不慎修改了数据成员，或者调用了其它非const成员函数，编译器将指出错误，这无疑会提高程序的健壮性。</p>
+<h2 id="3、const实现函数重载"><a href="#3、const实现函数重载" class="headerlink" title="3、const实现函数重载"></a>3、const实现函数重载</h2><p><strong>一般使用const&amp;作为参数，参数为引用，为了增加效率同时防止修改。</strong></p>
+<p>类中使用Const<br>在C++中，const成员变量也不能在类定义处初始化，只能通过构造函数初始化列表进行，并且必须有构造函数。<br>const数据成员的初始化只能在类的构造函数的初始化列表中进行。要想建立在整个类中都恒定的常量，应该用类中的枚举常量来实现，或者static const。<br>类中使用static和const：<br> <img src="https://img-blog.csdnimg.cn/20190719111023283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>指针作为形参传递是以：const char *的形式来传参数</p>
+<p>以上参考：<br><a href="https://www.cnblogs.com/jiabei521/p/3335676.html" target="_blank" rel="noopener">https://www.cnblogs.com/jiabei521/p/3335676.html</a></p>
+<ul>
+<li>总结，const四个主要作用：<br>1、const用于定义常量：const定义的常量编译器可以对其进行数据静态类型安全检查。这个是开发中经常用到的const的最基本的作用。<br>2、const修饰函数形式参数：当输入参数为用户自定义类型和抽象数据类型的时候(就是自己定义的类)，应该将“值传递”改为“const &amp;传递”，可以提高效率。<br>3、const 修饰函数的返回值：如给“指针传递”的函数返回值加const,则返回值不能被直接修改，且该返回值只能被赋值给加const修饰的同类型指针。<br><img src="https://img-blog.csdnimg.cn/20190719111302187.png" alt="在这里插入图片描述"></li>
+</ul>
+<p>4、const修饰类的成员函数和(函数定义体)：任何不会修改数据成员的函数都应用const修饰，这样，当不小心修改了数据成员或调用了非const成员函数时</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/18/C++分割字符串/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -394,7 +551,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
