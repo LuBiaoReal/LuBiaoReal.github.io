@@ -232,6 +232,349 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/21/Linux进程间通信/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陆标">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝花夕拾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/21/Linux进程间通信/" itemprop="url">Linux进程间通信</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-21T14:42:23+08:00">
+                2019-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><ul>
+<li><p>进程间除了可以使用 fork和exec传送打开的文件，也可以使用IPC（Inter Processing Communication）的方式通信。</p>
+</li>
+<li><p>经典的IPC包括：管道、FIFO、消息队列、信号量、以及共享存储。</p>
+</li>
+<li><p>在新的程序中要尽可能的避免使用消息队列和信号量，应该考虑全双工管道和记录锁，他们使用会更加的简单。共享存储依然有它的用途，虽然使用mmap函数也能提供同样的功能。</p>
+</li>
+<li><p>以下的所有的方式，除了POSIX信号量，其他方式生命周期都是随内核，不手动释就不会消失。</p>
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2></li>
+<li><p>管道是UNIX系统最古老的通信方式。有以下局限性：<br>  1、历史上是半双工的，由于兼容性，只有部分系统支持全双工。<br>  2、管道只能在公共祖先的两个进程间使用。通过由一个进程f创建，然后fork 之后，管道就能在父子啊进程中使用。FIFO就没有这个局限性。</p>
+</li>
+<li><p>虽然管道具有一定的局限性，但是目前应用最多的依然还是未命名管道和FIFO(命名管道) 。</p>
+</li>
+<li><p>使用pipe(int fd[2])创建管道，fd[0]表示读端，fd[1]表示写端，可使用close关闭，也可以使用read/write直接读写。</p>
+<h4 id="函数popen和pclose"><a href="#函数popen和pclose" class="headerlink" title="函数popen和pclose"></a>函数popen和pclose</h4></li>
+<li><p>常见的操作是创建一个链接到另一个进程的管道，然后输入或者输出数据，这两个函数就是标准IO提供的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">// 返回值：若成功返回文件指针，出错返回NULL</span></span><br><span class="line"><span class="function">FILE *<span class="title">popen</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>*cmdstring, <span class="keyword">const</span> <span class="keyword">char</span> *type)</span></span>;</span><br><span class="line"><span class="comment">//成功返回cmdstring的终止状态，出错返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pclose</span><span class="params">(FILE *fp)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函数popen先执行fork，然后调用exec执行cmdstring，返回一个IO文件指针，若type是r，则是标准输出。如type是“w”,则是标准输入。</p>
+</li>
+<li><p>cmdstring由Bourne shell执行：sh -c cmdstring</p>
+<h2 id="协同进程"><a href="#协同进程" class="headerlink" title="协同进程"></a>协同进程</h2></li>
+<li><p>popen函数只提供连接到另一个进程的标准输入或者标准输出的一个单向通道，而协同进程则有连接到另一个进程的两个单向管道：一个标准输入一个标准输出。具体例子详见C++常用函数中的实现。</p>
+<h2 id="FIFO"><a href="#FIFO" class="headerlink" title="FIFO"></a>FIFO</h2></li>
+<li><p>FIFO有时候被成为命名管道，<strong>未命名的管道只能在两个相关进程间通信，而FIFO可以在不相关的进程间通信</strong>。</p>
+</li>
+<li><p>使用mkfifo或者mkfifoat创建FIFO，要用open打开它。</p>
+</li>
+<li><p>FIFO有两个用途：<br>1、shell使用FIFO将数据从一个管道传送到另一个管道，无需创建中间临时文件。<br>2、在C/S程序中FIFO用作汇聚点，在客户端于服务器之间传递数据。</p>
+<h2 id="XSI-IPC结构的优缺点"><a href="#XSI-IPC结构的优缺点" class="headerlink" title="XSI IPC结构的优缺点"></a>XSI IPC结构的优缺点</h2></li>
+<li><p>XSI IPC 有三种：消息队列、信号量以及共享存储器。</p>
+</li>
+<li><p>缺点：<br>1、IPC结构是系统范围内起作用的，没有引用计数。导致资源的删除不彻底。<br>2、IPC在文件系统中没有名字，无法直接的去修改它们的属性。<br>3、IPC不使用文件描述符，不能对他们使用多路转接IO函数（select、poll）。</p>
+</li>
+<li><p>优点：<br>1、它们是可靠的、控制流的以及面向记录的。控制流的意思是：当缓冲区短缺的时候，或者接收线程不能接收更多消息的时候，发送线程就要休眠，到控制流条件消失时，发送进程自动唤醒。<br>2、它们可以以非先进先出的次序处理。</p>
+<h4 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h4></li>
+<li><p>消息队列是消息的链接表，存储在内核中，由消息队列标识符标识。</p>
+</li>
+<li><p>并不一定要按照先进先出的次序来取得消息，也可以按照消息的字段取得消息。</p>
+</li>
+<li><p>最大的消息队列还要根据系统安装的RAM数量来决定。</p>
+</li>
+<li><p>如果需要客户进程于服务器进程要进行双向数据交流，可以使用消息队列或者全双工管道。</p>
+</li>
+<li><p>消息度列原先的目的是提供高于一般速度的IPC，但是现在与其他的IPC比较，速度方面已经没有太大的差别了。所以在新的应用程序中并不实用。</p>
+</li>
+<li><p>使用：<br>1、调用的第一个函数通常是msgget，其功能是打开一个现有的队列，或者创建一个队列，<br>2、msgctl函数对队列执行多种操作。<br>3、调用msgsnd将数据放到消息队列中。<br>4、调用msgrcv从队列中取用消息。</p>
+<h4 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h4></li>
+<li><p>进程间的信号量与已经介绍的IPC机构不太一样，他是一个计数器，用于未多个进程提供对共享数据对象的访问。</p>
+</li>
+<li><p>为了获得共享资源，进程需要执行以下几个步骤：<br>1、测试该资源信号量。<br>2、若信号量的值为正，则进程可以使用该资源，进程会将信号量的值减1，表示使用了一个资源单位。当进程不再使用时，信号量加1.<br>3、若为0，进程进入休眠，直到信号量大于0才被唤醒，并重新进入1中。</p>
+</li>
+<li><p>常用的信号量使用形式称之为<strong>二元信号量</strong>，控制单个资源，初始值为1.</p>
+</li>
+<li><p>XSI信号量则要复杂很多，会有以下三种缺陷：<br>1、信号量并非单个非负值，当创建信号量的时候，要指定集合中信号量的数量。<br>2、信号量的创建(semget)独立于初始化（semctl），无法保证其原子性。<br>3、即便线程没有使用XSI IPC了，它们任然存在，有的在程序终止时并没有释放已经分配给它的信号量。</p>
+</li>
+<li><p>使用：<br>1、使用semget来获得一个信号量ID。<br>2、调用semctl函数进行多种信号量的操作。<br>3、semop函数自动执行信号量集合上的操作数组。</p>
+</li>
+<li><p>与锁的比较：在Linux上记录锁比信号更快，但是共享的存储中，互斥量的性能比信号量和记录锁都要优越。</p>
+<h4 id="共享存储"><a href="#共享存储" class="headerlink" title="共享存储"></a>共享存储</h4></li>
+<li><p>共享存储允许两个或者多个进程共享一个给定的区域，数据不需要再进程间进行复制，所以速度最快。</p>
+</li>
+<li><p>若服务器正在将数据放入共享存储区，则在它做完存储操作之前，客户线程不应该去取这些数据。</p>
+</li>
+<li><p>使用：<br>1、调用shmget获得一个共享存储标识符<br>2、使用shmctl函数对共享存储段执行多种操作。<br>3、一旦创建一个共享存储段，进程可以用shmat将其连接到它的地址空间中。注意将addr置为0，以便系统自己选择地址。<br>4、当调用结束，使用shmdt将其分离。</p>
+<h4 id="POSIX信号量"><a href="#POSIX信号量" class="headerlink" title="POSIX信号量"></a>POSIX信号量</h4></li>
+<li><p>POSIX信号量解决了XSI信号量的几个缺陷，使用相对更加的简单，上述的所有方式都。</p>
+</li>
+<li><p>命名信号量使用：<br>1、可以调用sem_open函数创建一个新的命名信号量或者使用一个现有信号量。<br>2、如果进程没有调用sem_close退出，内核会自动关闭任何打开的信号<br>3、可以使用sem_unlink销毁一个命名的信号量；可以使用sem_wait和sem_trywait来实现信号的减1操作<br>4、可以使用sem_timewait函数阻塞一段时间。<br>5、可以使用sempost函数使得信号增加1</p>
+</li>
+<li><p>未命名信号量使用：<br>1、可以调用sem_init函数创建一个未命名的信号量。<br>2、能够使用sem_getvalue检索信号量的值。<br>3、使用完信号量时，调用sem_destroy函数丢弃信号量资源。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/20/Linux线程间同步/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陆标">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝花夕拾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/20/Linux线程间同步/" itemprop="url">Linux线程间同步</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-20T18:16:09+08:00">
+                2019-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>一般的增量操作流程如下：<br>  1、从内存读取寄存器。<br>  2、在寄存器对变量进行增量操作。<br>  3、把新的值写到内存单元。</li>
+<li>如果两个线程在同一时间，对同一变量做增量操作，而不进行同步的话，结果可能会出现不一致，可能会增加1，也可能会增加2。</li>
+<li>如果是原子操作就不存在上述的竞争，数据总是顺序一致出现。<h2 id="锁（互斥量）"><a href="#锁（互斥量）" class="headerlink" title="锁（互斥量）"></a>锁（互斥量）</h2></li>
+<li>pthread互斥量mutex可以在访问共享资源前对互斥量加锁，访问完之后释放互斥量。对互斥量加锁之后，任何其他试图再次对互斥量加锁的线程都会被阻塞，只到当前的线程释放互斥锁。</li>
+<li>只有所有的线程设计都遵守相同的数据访问规则，互斥量机制才能够正常的运行。</li>
+<li>加锁的对象语句在pthread_mutex_lock和pthread_mutex_unlock函数之间。<h2 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h2>产生死锁的可能有：</li>
+<li>线程试图对同一个互斥量加锁两次，那么自身就会陷入死锁的状态。</li>
+<li>当两个线程都在请求对方线程资源的时候，并且各自锁柱了对方的互斥量，导致两个线程都不发前行，于是就产生了死锁。</li>
+</ul>
+<p>解死锁：</p>
+<ul>
+<li><strong>可以通过仔细控制互斥量加锁的顺序来避免死锁的发生</strong>。比如：要对两个互斥量A和B加锁，所有的线程都是在锁住B之前，来锁住A，就不会发生死锁。因为可能出现死锁只会发生在一个线程试图锁住另一个线程以相反方向锁住的互斥量。</li>
+<li><strong>可以先释放已经占有的锁，然后过一段时间再试试</strong>。这种情况可以使用pthread_mutex_trylock接口避免死锁。如果pthread_try_lock返回成功，那就可以前进。反之，可以先释放已经占有的锁，然后过段时间再试试。</li>
+</ul>
+<h2 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h2><ul>
+<li>读写锁与互斥量类似，不过允许更高的并行性能。</li>
+<li>不同于正常锁只有加锁和不加锁，读写锁有三种模式：读模式加锁、写模式加锁、不加锁。</li>
+<li>一次只有一个线程可以占有写模式的读写锁，可以有多个线程占有读写锁的读模式。</li>
+<li>读写锁非常适合对数据读的次数远大于写的情况，当线程先获得读模式下的读写锁，该锁保护的数据就可以被多个获得读模式的线程读取。</li>
+</ul>
+<h2 id="条件变量"><a href="#条件变量" class="headerlink" title="条件变量"></a>条件变量</h2><ul>
+<li>条件变量是线程的另一种同步机制，条件变量与互斥锁一起使用允许线程以无竞争的方式等待特定条件的发生。</li>
+<li>通过pthread_cond_t数据类型保存条件变量，通过pthread_cond_wait函数对锁的状态进行判定。</li>
+</ul>
+<h2 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h2><ul>
+<li>与互斥量类似，但是不是通过休眠使得进程阻塞的，而是通过一直处于忙等状态，进行阻塞。</li>
+<li>使用于锁被持有很短的时间，线程不希望在调度上花费过多的成本。</li>
+</ul>
+<h2 id="屏障"><a href="#屏障" class="headerlink" title="屏障"></a>屏障</h2><ul>
+<li>是用户协调多个线程并行工作的机制，允许每一个线程的等待，直到所有的合作线程都达到了某一个点，然后继续执行。比如：pthread_join函数。</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/Linux信号的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1338,270 +1681,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/29/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陆标">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="朝花夕拾">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/29/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-29T20:22:09+08:00">
-                2019-06-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/19/不同编译器下各个数据类型字节长度/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陆标">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="朝花夕拾">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/19/不同编译器下各个数据类型字节长度/" itemprop="url">不同编译器下各个数据类型字节长度</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T11:43:02+08:00">
-                2019-06-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="各个数据类型比较"><a href="#各个数据类型比较" class="headerlink" title="各个数据类型比较"></a>各个数据类型比较</h2><ul>
-<li>16位编译器<br>char ：1个字节<br>char*(即指针变量): 2个字节<br>short int : 2个字节<br>int：  2个字节<br>unsigned int : 2个字节<br>float:  4个字节<br>double:   8个字节<br>long:   4个字节<br>long long:  8个字节<br>unsigned long:  4个字节</li>
-</ul>
-<ul>
-<li><p>32位编译器<br>char ：1个字节<br>char*（即指针变量）: 4个字节（32位的寻址空间是2^32, 即32个bit，也就是4个字节。同理64位编译器）<br>short int : 2个字节<br>int：  4个字节<br>unsigned int : 4个字节<br>float:  4个字节<br>double:   8个字节<br>long:   4个字节<br>long long:  8个字节<br>unsigned long:  4个字节</p>
-</li>
-<li><p>64位编译器<br>char ：1个字节<br>char*(即指针变量): 8个字节<br>short int : 2个字节<br>int：  4个字节<br>unsigned int : 4个字节<br>float:  4个字节<br>double:   8个字节<br>long:   8个字节<br>long long:  8个字节<br>unsigned long:  8个字节</p>
-</li>
-</ul>
-<ul>
-<li>后缀：<br>当位long型的时候，尽量使用做后缀<br>24ULL：unsigned long long<br>u8：utf8<br>u：16位<br>U：32位</li>
-</ul>
-<p>3.1415926L：long double</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1652,7 +1731,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

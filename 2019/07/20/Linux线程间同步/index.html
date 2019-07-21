@@ -79,20 +79,17 @@
 
 
 
-<meta name="description" content="1、与define的区别具体来说，有以下几方面的区别：  编译器处理方式define – 在预处理阶段进行替换const – 在编译时确定其值  类型检查define – 无类型，不进行类型安全检查，可能会产生意想不到的错误const – 有数据类型，编译时会进行类型检查  内存空间define – 不分配内存，给出的是立即数，有多少次使用就进行多少次替换，在内存中会有多个拷贝，消耗内存大cons">
+<meta name="description" content="前言 一般的增量操作流程如下：  1、从内存读取寄存器。  2、在寄存器对变量进行增量操作。  3、把新的值写到内存单元。 如果两个线程在同一时间，对同一变量做增量操作，而不进行同步的话，结果可能会出现不一致，可能会增加1，也可能会增加2。 如果是原子操作就不存在上述的竞争，数据总是顺序一致出现。锁（互斥量） pthread互斥量mutex可以在访问共享资源前对互斥量加锁，访问完之后释放互斥量。对">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++中const详解">
-<meta property="og:url" content="http://yoursite.com/2019/06/19/C-中const详解/index.html">
+<meta property="og:title" content="Linux线程间同步">
+<meta property="og:url" content="http://yoursite.com/2019/07/20/Linux线程间同步/index.html">
 <meta property="og:site_name" content="朝花夕拾">
-<meta property="og:description" content="1、与define的区别具体来说，有以下几方面的区别：  编译器处理方式define – 在预处理阶段进行替换const – 在编译时确定其值  类型检查define – 无类型，不进行类型安全检查，可能会产生意想不到的错误const – 有数据类型，编译时会进行类型检查  内存空间define – 不分配内存，给出的是立即数，有多少次使用就进行多少次替换，在内存中会有多个拷贝，消耗内存大cons">
+<meta property="og:description" content="前言 一般的增量操作流程如下：  1、从内存读取寄存器。  2、在寄存器对变量进行增量操作。  3、把新的值写到内存单元。 如果两个线程在同一时间，对同一变量做增量操作，而不进行同步的话，结果可能会出现不一致，可能会增加1，也可能会增加2。 如果是原子操作就不存在上述的竞争，数据总是顺序一致出现。锁（互斥量） pthread互斥量mutex可以在访问共享资源前对互斥量加锁，访问完之后释放互斥量。对">
 <meta property="og:locale" content="简体汉语">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190719111023283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190719111302187.png">
-<meta property="og:updated_time" content="2019-07-19T03:18:47.438Z">
+<meta property="og:updated_time" content="2019-07-20T10:16:34.968Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++中const详解">
-<meta name="twitter:description" content="1、与define的区别具体来说，有以下几方面的区别：  编译器处理方式define – 在预处理阶段进行替换const – 在编译时确定其值  类型检查define – 无类型，不进行类型安全检查，可能会产生意想不到的错误const – 有数据类型，编译时会进行类型检查  内存空间define – 不分配内存，给出的是立即数，有多少次使用就进行多少次替换，在内存中会有多个拷贝，消耗内存大cons">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190719111023283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70">
+<meta name="twitter:title" content="Linux线程间同步">
+<meta name="twitter:description" content="前言 一般的增量操作流程如下：  1、从内存读取寄存器。  2、在寄存器对变量进行增量操作。  3、把新的值写到内存单元。 如果两个线程在同一时间，对同一变量做增量操作，而不进行同步的话，结果可能会出现不一致，可能会增加1，也可能会增加2。 如果是原子操作就不存在上述的竞争，数据总是顺序一致出现。锁（互斥量） pthread互斥量mutex可以在访问共享资源前对互斥量加锁，访问完之后释放互斥量。对">
 
 
 
@@ -122,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/19/C-中const详解/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/20/Linux线程间同步/">
 
 
 
 
 
-  <title>C++中const详解 | 朝花夕拾</title>
+  <title>Linux线程间同步 | 朝花夕拾</title>
   
 
 
@@ -235,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/19/C-中const详解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/20/Linux线程间同步/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="陆标">
@@ -252,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">C++中const详解</h1>
+          <h1 class="post-title" itemprop="name headline">Linux线程间同步</h1>
         
 
         <div class="post-meta">
@@ -264,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T11:15:06+08:00">
-                2019-06-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-20T18:16:09+08:00">
+                2019-07-20
               </time>
             
 
@@ -302,44 +299,38 @@
       
 
       
-        <h2 id="1、与define的区别"><a href="#1、与define的区别" class="headerlink" title="1、与define的区别"></a>1、与define的区别</h2><p>具体来说，有以下几方面的区别：</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>一般的增量操作流程如下：<br>  1、从内存读取寄存器。<br>  2、在寄存器对变量进行增量操作。<br>  3、把新的值写到内存单元。</li>
+<li>如果两个线程在同一时间，对同一变量做增量操作，而不进行同步的话，结果可能会出现不一致，可能会增加1，也可能会增加2。</li>
+<li>如果是原子操作就不存在上述的竞争，数据总是顺序一致出现。<h2 id="锁（互斥量）"><a href="#锁（互斥量）" class="headerlink" title="锁（互斥量）"></a>锁（互斥量）</h2></li>
+<li>pthread互斥量mutex可以在访问共享资源前对互斥量加锁，访问完之后释放互斥量。对互斥量加锁之后，任何其他试图再次对互斥量加锁的线程都会被阻塞，只到当前的线程释放互斥锁。</li>
+<li>只有所有的线程设计都遵守相同的数据访问规则，互斥量机制才能够正常的运行。</li>
+<li>加锁的对象语句在pthread_mutex_lock和pthread_mutex_unlock函数之间。<h2 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h2>产生死锁的可能有：</li>
+<li>线程试图对同一个互斥量加锁两次，那么自身就会陷入死锁的状态。</li>
+<li>当两个线程都在请求对方线程资源的时候，并且各自锁柱了对方的互斥量，导致两个线程都不发前行，于是就产生了死锁。</li>
+</ul>
+<p>解死锁：</p>
 <ul>
-<li><p>编译器处理方式<br>define – 在预处理阶段进行替换<br>const – 在编译时确定其值</p>
-</li>
-<li><p>类型检查<br>define – 无类型，不进行类型安全检查，可能会产生意想不到的错误<br>const – 有数据类型，编译时会进行类型检查</p>
-</li>
-<li><p>内存空间<br>define – 不分配内存，给出的是立即数，有多少次使用就进行多少次替换，在内存中会有多个拷贝，消耗内存大<br>const – 在静态存储区中分配空间，在程序运行过程中内存中只有一个拷贝</p>
-</li>
-<li><p>其他<br>在编译时， 编译器通常不为const常量分配存储空间，而是将它们保存在符号表中，这使得它成为一个编译期间的常量，没有了存储与读内存的操作，使得它的效率也很高。<br>宏替换只作替换，不做计算，不做表达式求解。</p>
-</li>
+<li><strong>可以通过仔细控制互斥量加锁的顺序来避免死锁的发生</strong>。比如：要对两个互斥量A和B加锁，所有的线程都是在锁住B之前，来锁住A，就不会发生死锁。因为可能出现死锁只会发生在一个线程试图锁住另一个线程以相反方向锁住的互斥量。</li>
+<li><strong>可以先释放已经占有的锁，然后过一段时间再试试</strong>。这种情况可以使用pthread_mutex_trylock接口避免死锁。如果pthread_try_lock返回成功，那就可以前进。反之，可以先释放已经占有的锁，然后过段时间再试试。</li>
 </ul>
-<p>宏定义的作用范围仅限于当前文件。<br>默认状态下，const对象只在文件内有效，当多个文件中出现了同名的const变量时，等同于在不同文件中分别定义了独立的变量。<br>如果想在多个文件之间共享const对象，必须在变量定义之前添加extern关键字（在声明和定义时都要加）。</p>
-<hr>
-<p>作者：狮子HH<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/yingyujianmo/article/details/51206460" target="_blank" rel="noopener">https://blog.csdn.net/yingyujianmo/article/details/51206460</a> </p>
-<h2 id="2、const的基础用法"><a href="#2、const的基础用法" class="headerlink" title="2、const的基础用法"></a>2、const的基础用法</h2><ul>
-<li><p>使用全局的const变量：<br>在c.h中声明：extern const int I;<br>在c.cpp中定义:extern const int I= 10;</p>
-</li>
-<li><p>引用：<br>1、不能把一个const引用给一个非const引用：<br>const int i=0;<br>const int &amp;j=I;<br>//这是错误的<br>2、不能直接更改const 引用的值，但可以改引用对象的值</p>
-</li>
-<li><p><em>对于类中的const成员变量必须通过初始化列表进行初始化*</em></p>
-</li>
+<h2 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h2><ul>
+<li>读写锁与互斥量类似，不过允许更高的并行性能。</li>
+<li>不同于正常锁只有加锁和不加锁，读写锁有三种模式：读模式加锁、写模式加锁、不加锁。</li>
+<li>一次只有一个线程可以占有写模式的读写锁，可以有多个线程占有读写锁的读模式。</li>
+<li>读写锁非常适合对数据读的次数远大于写的情况，当线程先获得读模式下的读写锁，该锁保护的数据就可以被多个获得读模式的线程读取。</li>
 </ul>
-<ul>
-<li><p>C++声明应该从右边往左边看</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> errNum=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> *<span class="keyword">const</span> curErr=&amp;errNuml;</span><br><span class="line"><span class="comment">//上面就是一个“指向int对象的const指针，const指针不能被修改，所以必须在定义的时候就初始化。</span></span><br><span class="line"><span class="keyword">int</span> errNum=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span>* curErr=&amp;errNuml;</span><br><span class="line"><span class="comment">//上面是“指向const对象的指针“，可以把非const对象赋值给这个指针，这样可以通过修改指针指向对象的值，而不能修改const对象指针</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>如果const位于星号的左侧，则const就是用来修饰指针所指向的变量，即指针指向的对象为常量；如果const位于星号的右侧，const就是修饰指针本身，即指针本身是常量。</strong>，如：<br>cont int val=0;<br>int const * i = &val;        //如果val不为const，也可以，但<em>i是可以修改的。<br>而：<br>int err=0;<br>int *const cur=&err;        //表示是cur的地址是固定的，err的内容和</em>cur都可以改</p>
-</li>
+<h2 id="条件变量"><a href="#条件变量" class="headerlink" title="条件变量"></a>条件变量</h2><ul>
+<li>条件变量是线程的另一种同步机制，条件变量与互斥锁一起使用允许线程以无竞争的方式等待特定条件的发生。</li>
+<li>通过pthread_cond_t数据类型保存条件变量，通过pthread_cond_wait函数对锁的状态进行判定。</li>
 </ul>
-<p>在一个类中，任何不会修改数据成员的函数都应该声明为const类型。如果在编写const成员函数时，不慎修改了数据成员，或者调用了其它非const成员函数，编译器将指出错误，这无疑会提高程序的健壮性。</p>
-<h2 id="3、const实现函数重载"><a href="#3、const实现函数重载" class="headerlink" title="3、const实现函数重载"></a>3、const实现函数重载</h2><p><strong>一般使用const&amp;作为参数，参数为引用，为了增加效率同时防止修改。</strong></p>
-<p>类中使用Const<br>在C++中，const成员变量也不能在类定义处初始化，只能通过构造函数初始化列表进行，并且必须有构造函数。<br>const数据成员的初始化只能在类的构造函数的初始化列表中进行。要想建立在整个类中都恒定的常量，应该用类中的枚举常量来实现，或者static const。<br>类中使用static和const：<br> <img src="https://img-blog.csdnimg.cn/20190719111023283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>指针作为形参传递是以：const char *的形式来传参数</p>
-<p>以上参考：<br><a href="https://www.cnblogs.com/jiabei521/p/3335676.html" target="_blank" rel="noopener">https://www.cnblogs.com/jiabei521/p/3335676.html</a></p>
-<ul>
-<li>总结，const四个主要作用：<br>1、const用于定义常量：const定义的常量编译器可以对其进行数据静态类型安全检查。这个是开发中经常用到的const的最基本的作用。<br>2、const修饰函数形式参数：当输入参数为用户自定义类型和抽象数据类型的时候(就是自己定义的类)，应该将“值传递”改为“const &amp;传递”，可以提高效率。<br>3、const 修饰函数的返回值：如给“指针传递”的函数返回值加const,则返回值不能被直接修改，且该返回值只能被赋值给加const修饰的同类型指针。<br><img src="https://img-blog.csdnimg.cn/20190719111302187.png" alt="在这里插入图片描述"></li>
+<h2 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h2><ul>
+<li>与互斥量类似，但是不是通过休眠使得进程阻塞的，而是通过一直处于忙等状态，进行阻塞。</li>
+<li>使用于锁被持有很短的时间，线程不希望在调度上花费过多的成本。</li>
 </ul>
-<p>4、const修饰类的成员函数和(函数定义体)：任何不会修改数据成员的函数都应用const修饰，这样，当不小心修改了数据成员或调用了非const成员函数时</p>
+<h2 id="屏障"><a href="#屏障" class="headerlink" title="屏障"></a>屏障</h2><ul>
+<li>是用户协调多个线程并行工作的机制，允许每一个线程的等待，直到所有的合作线程都达到了某一个点，然后继续执行。比如：pthread_join函数。</li>
+</ul>
 
       
     </div>
@@ -364,8 +355,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/18/C++分割字符串/" rel="next" title="C++常用函数实现">
-                <i class="fa fa-chevron-left"></i> C++常用函数实现
+              <a href="/2019/07/18/Linux信号的使用/" rel="next" title="Linux信号的使用">
+                <i class="fa fa-chevron-left"></i> Linux信号的使用
               </a>
             
           </div>
@@ -374,8 +365,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/06/19/不同编译器下各个数据类型字节长度/" rel="prev" title="不同编译器下各个数据类型字节长度">
-                不同编译器下各个数据类型字节长度 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/21/Linux进程间通信/" rel="prev" title="Linux进程间通信">
+                Linux进程间通信 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -500,7 +491,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、与define的区别"><span class="nav-number">1.</span> <span class="nav-text">1、与define的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、const的基础用法"><span class="nav-number">2.</span> <span class="nav-text">2、const的基础用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、const实现函数重载"><span class="nav-number">3.</span> <span class="nav-text">3、const实现函数重载</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁（互斥量）"><span class="nav-number">2.</span> <span class="nav-text">锁（互斥量）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#避免死锁"><span class="nav-number">3.</span> <span class="nav-text">避免死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读写锁"><span class="nav-number">4.</span> <span class="nav-text">读写锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件变量"><span class="nav-number">5.</span> <span class="nav-text">条件变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自旋锁"><span class="nav-number">6.</span> <span class="nav-text">自旋锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#屏障"><span class="nav-number">7.</span> <span class="nav-text">屏障</span></a></li></ol></div>
             
 
           </div>
