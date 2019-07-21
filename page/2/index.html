@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="简体汉语">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="陆标，个人博客">
 
 
 
@@ -85,7 +85,7 @@
 <meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="朝花夕拾">
 <meta property="og:description" content="生命不止，奋斗不息">
-<meta property="og:locale" content="简体汉语">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="朝花夕拾">
 <meta name="twitter:description" content="生命不止，奋斗不息">
@@ -96,7 +96,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -104,7 +104,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -136,7 +136,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="简体汉语">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -185,7 +185,37 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Home
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
           </a>
         </li>
       
@@ -195,7 +225,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            Archives
+            归档
           </a>
         </li>
       
@@ -237,7 +267,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="陆标">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/profile.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -261,9 +291,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T11:43:02+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-19T11:43:02+08:00">
                 2019-06-19
               </time>
             
@@ -303,21 +333,16 @@
       
         
           
-            <h2 id="各个数据类型比较"><a href="#各个数据类型比较" class="headerlink" title="各个数据类型比较"></a>各个数据类型比较</h2><ul>
-<li>16位编译器<br>char ：1个字节<br>char*(即指针变量): 2个字节<br>short int : 2个字节<br>int：  2个字节<br>unsigned int : 2个字节<br>float:  4个字节<br>double:   8个字节<br>long:   4个字节<br>long long:  8个字节<br>unsigned long:  4个字节</li>
-</ul>
-<ul>
-<li><p>32位编译器<br>char ：1个字节<br>char*（即指针变量）: 4个字节（32位的寻址空间是2^32, 即32个bit，也就是4个字节。同理64位编译器）<br>short int : 2个字节<br>int：  4个字节<br>unsigned int : 4个字节<br>float:  4个字节<br>double:   8个字节<br>long:   4个字节<br>long long:  8个字节<br>unsigned long:  4个字节</p>
-</li>
-<li><p>64位编译器<br>char ：1个字节<br>char*(即指针变量): 8个字节<br>short int : 2个字节<br>int：  4个字节<br>unsigned int : 4个字节<br>float:  4个字节<br>double:   8个字节<br>long:   8个字节<br>long long:  8个字节<br>unsigned long:  8个字节</p>
-</li>
-</ul>
-<ul>
-<li>后缀：<br>当位long型的时候，尽量使用做后缀<br>24ULL：unsigned long long<br>u8：utf8<br>u：16位<br>U：32位</li>
-</ul>
-<p>3.1415926L：long double</p>
-
-          
+          各个数据类型比较
+16位编译器char ：1个字节char*(即指针变量): 2个字节short int : 2个字节int：  2个字节unsigned int : 2个字节float:  4个字节double:   8个字节long:   4个字节long long:  8个字节unsigned
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/06/19/不同编译器下各个数据类型字节长度/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -369,7 +394,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="陆标">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/profile.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -393,9 +418,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T11:15:06+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-19T11:15:06+08:00">
                 2019-06-19
               </time>
             
@@ -435,46 +460,21 @@
       
         
           
-            <h2 id="1、与define的区别"><a href="#1、与define的区别" class="headerlink" title="1、与define的区别"></a>1、与define的区别</h2><p>具体来说，有以下几方面的区别：</p>
-<ul>
-<li><p>编译器处理方式<br>define – 在预处理阶段进行替换<br>const – 在编译时确定其值</p>
-</li>
-<li><p>类型检查<br>define – 无类型，不进行类型安全检查，可能会产生意想不到的错误<br>const – 有数据类型，编译时会进行类型检查</p>
-</li>
-<li><p>内存空间<br>define – 不分配内存，给出的是立即数，有多少次使用就进行多少次替换，在内存中会有多个拷贝，消耗内存大<br>const – 在静态存储区中分配空间，在程序运行过程中内存中只有一个拷贝</p>
-</li>
-<li><p>其他<br>在编译时， 编译器通常不为const常量分配存储空间，而是将它们保存在符号表中，这使得它成为一个编译期间的常量，没有了存储与读内存的操作，使得它的效率也很高。<br>宏替换只作替换，不做计算，不做表达式求解。</p>
-</li>
-</ul>
-<p>宏定义的作用范围仅限于当前文件。<br>默认状态下，const对象只在文件内有效，当多个文件中出现了同名的const变量时，等同于在不同文件中分别定义了独立的变量。<br>如果想在多个文件之间共享const对象，必须在变量定义之前添加extern关键字（在声明和定义时都要加）。</p>
-<hr>
-<p>作者：狮子HH<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/yingyujianmo/article/details/51206460" target="_blank" rel="noopener">https://blog.csdn.net/yingyujianmo/article/details/51206460</a> </p>
-<h2 id="2、const的基础用法"><a href="#2、const的基础用法" class="headerlink" title="2、const的基础用法"></a>2、const的基础用法</h2><ul>
-<li><p>使用全局的const变量：<br>在c.h中声明：extern const int I;<br>在c.cpp中定义:extern const int I= 10;</p>
-</li>
-<li><p>引用：<br>1、不能把一个const引用给一个非const引用：<br>const int i=0;<br>const int &amp;j=I;<br>//这是错误的<br>2、不能直接更改const 引用的值，但可以改引用对象的值</p>
-</li>
-<li><p><em>对于类中的const成员变量必须通过初始化列表进行初始化*</em></p>
-</li>
-</ul>
-<ul>
-<li><p>C++声明应该从右边往左边看</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> errNum=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> *<span class="keyword">const</span> curErr=&amp;errNuml;</span><br><span class="line"><span class="comment">//上面就是一个“指向int对象的const指针，const指针不能被修改，所以必须在定义的时候就初始化。</span></span><br><span class="line"><span class="keyword">int</span> errNum=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span>* curErr=&amp;errNuml;</span><br><span class="line"><span class="comment">//上面是“指向const对象的指针“，可以把非const对象赋值给这个指针，这样可以通过修改指针指向对象的值，而不能修改const对象指针</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>如果const位于星号的左侧，则const就是用来修饰指针所指向的变量，即指针指向的对象为常量；如果const位于星号的右侧，const就是修饰指针本身，即指针本身是常量。</strong>，如：<br>cont int val=0;<br>int const * i = &val;        //如果val不为const，也可以，但<em>i是可以修改的。<br>而：<br>int err=0;<br>int *const cur=&err;        //表示是cur的地址是固定的，err的内容和</em>cur都可以改</p>
-</li>
-</ul>
-<p>在一个类中，任何不会修改数据成员的函数都应该声明为const类型。如果在编写const成员函数时，不慎修改了数据成员，或者调用了其它非const成员函数，编译器将指出错误，这无疑会提高程序的健壮性。</p>
-<h2 id="3、const实现函数重载"><a href="#3、const实现函数重载" class="headerlink" title="3、const实现函数重载"></a>3、const实现函数重载</h2><p><strong>一般使用const&amp;作为参数，参数为引用，为了增加效率同时防止修改。</strong></p>
-<p>类中使用Const<br>在C++中，const成员变量也不能在类定义处初始化，只能通过构造函数初始化列表进行，并且必须有构造函数。<br>const数据成员的初始化只能在类的构造函数的初始化列表中进行。要想建立在整个类中都恒定的常量，应该用类中的枚举常量来实现，或者static const。<br>类中使用static和const：<br> <img src="https://img-blog.csdnimg.cn/20190719111023283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlbGxvd2QxMjM=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>指针作为形参传递是以：const char *的形式来传参数</p>
-<p>以上参考：<br><a href="https://www.cnblogs.com/jiabei521/p/3335676.html" target="_blank" rel="noopener">https://www.cnblogs.com/jiabei521/p/3335676.html</a></p>
-<ul>
-<li>总结，const四个主要作用：<br>1、const用于定义常量：const定义的常量编译器可以对其进行数据静态类型安全检查。这个是开发中经常用到的const的最基本的作用。<br>2、const修饰函数形式参数：当输入参数为用户自定义类型和抽象数据类型的时候(就是自己定义的类)，应该将“值传递”改为“const &amp;传递”，可以提高效率。<br>3、const 修饰函数的返回值：如给“指针传递”的函数返回值加const,则返回值不能被直接修改，且该返回值只能被赋值给加const修饰的同类型指针。<br><img src="https://img-blog.csdnimg.cn/20190719111302187.png" alt="在这里插入图片描述"></li>
-</ul>
-<p>4、const修饰类的成员函数和(函数定义体)：任何不会修改数据成员的函数都应用const修饰，这样，当不小心修改了数据成员或调用了非const成员函数时</p>
+          1、与define的区别具体来说，有以下几方面的区别：
 
-          
+编译器处理方式define – 在预处理阶段进行替换const – 在编译时确定其值
+
+类型检查define – 无类型，不进行类型安全检查，可能会产生意想不到的错误const – 有数据类型，编译时会进行类型检查
+
+内存空间define –
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/06/19/C-中const详解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -526,7 +526,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="陆标">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/profile.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -550,9 +550,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-18T17:15:47+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-18T17:15:47+08:00">
                 2019-06-18
               </time>
             
@@ -592,14 +592,15 @@
       
         
           
-            <h2 id="分割字符串"><a href="#分割字符串" class="headerlink" title="分割字符串"></a>分割字符串</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;  split(<span class="built_in">string</span> line,<span class="built_in">string</span> pattern)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> pos;</span><br><span class="line">	<span class="comment">//最后加一个分割符</span></span><br><span class="line">	line +=pattern;</span><br><span class="line">	<span class="comment">//得到长度</span></span><br><span class="line">	<span class="keyword">int</span> len=line.size();</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; result;</span><br><span class="line">	<span class="comment">//遍历每隔字符</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt;len;i++)&#123;</span><br><span class="line">		<span class="comment">//寻找分割符所在的位置</span></span><br><span class="line">		pos = line.find(pattern,i);</span><br><span class="line">		<span class="comment">//当前位置不是超限位置</span></span><br><span class="line">		<span class="keyword">if</span>(pos &lt; len)&#123;</span><br><span class="line">			<span class="comment">//取得子字符串，注意substr参数是当前索引到索引后的多少个字符</span></span><br><span class="line">			<span class="built_in">string</span> piece = line.substr(i,pos-i);</span><br><span class="line">			result.push_back(piece);</span><br><span class="line">			<span class="comment">//重新将当前索引定位到子字符串的最后位置</span></span><br><span class="line">			i = pos+pattern.size()<span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="在进程中获取Linux终端的返回字"><a href="#在进程中获取Linux终端的返回字" class="headerlink" title="在进程中获取Linux终端的返回字"></a>在进程中获取Linux终端的返回字</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//用于输入shell语句后得到返回的值，输入为终端命令</span></span><br><span class="line"><span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">exec</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* cmd)</span> </span>&#123;</span><br><span class="line">    FILE* pipe = popen(cmd, <span class="string">"r"</span>);</span><br><span class="line">    <span class="keyword">if</span> (!pipe) <span class="keyword">return</span> <span class="string">"ERROR"</span>;</span><br><span class="line">    <span class="keyword">char</span> buffer[<span class="number">128</span>];</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> result = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">while</span>(!feof(pipe)) &#123;</span><br><span class="line">        <span class="keyword">if</span>(fgets(buffer, <span class="number">128</span>, pipe) != <span class="literal">NULL</span>)</span><br><span class="line">            result += buffer;</span><br><span class="line">    &#125;</span><br><span class="line">    pclose(pipe);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="检查文件夹是否存在，输入为路径"><a href="#检查文件夹是否存在，输入为路径" class="headerlink" title="检查文件夹是否存在，输入为路径"></a>检查文件夹是否存在，输入为路径</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">checkFile</span><span class="params">(<span class="built_in">string</span> path)</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::fstream _file;</span><br><span class="line">    _file.open(path.c_str(),ios::in);</span><br><span class="line">    <span class="keyword">if</span>(!_file)&#123;</span><br><span class="line">    	<span class="comment">//不存在</span></span><br><span class="line">    	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    	<span class="comment">//已经创建</span></span><br><span class="line">    	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
+          分割字符串1234567891011121314151617181920212223vector&lt;string&gt;  split(string line,string pattern)&#123;	int pos;	//最后加一个分割符	line +=pattern;	//得到长度	int
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/06/18/C++分割字符串/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -651,7 +652,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="陆标">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/profile.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -675,9 +676,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-18T17:15:47+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-18T17:15:47+08:00">
                 2019-05-18
               </time>
             
@@ -717,21 +718,15 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/18/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -804,6 +799,8 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image" src="/images/profile.jpg" alt="陆标">
+            
               <p class="site-author-name" itemprop="name">陆标</p>
               <p class="site-description motion-element" itemprop="description">生命不止，奋斗不息</p>
           </div>
@@ -816,7 +813,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">14</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -876,21 +873,17 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">陆标</span>
+  <span class="author" itemprop="copyrightHolder">本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。转载请注明出处！</span>
 
   
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
-  <span class="post-meta-divider">|</span>
 
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
@@ -937,7 +930,12 @@
   
 
 
+  
 
+
+
+  
+  
 
 
 
@@ -977,6 +975,21 @@
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
 
   
 
@@ -989,6 +1002,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
 
   
 
