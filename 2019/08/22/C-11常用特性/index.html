@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="陆标，个人博客">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="智能指针 使用new和malloc申请的内存空间，没有被释放会造成内存泄漏，为了一劳永逸，提出了智能指针，自动回收内存。 智能指针将一个计数器与对象相关联，引用计数器跟踪该类有多少个对象共享同一个指针，计数器初始化为1，当减少至0的时候就删除指针。  常用指针简介 auto_ptr:不支持复制（拷贝构造）和赋值（=），但是赋值时却不会报错，有很多问题。 unique_ptr：在赋值和复制时会报错。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++11常用特性">
+<meta property="og:url" content="http://yoursite.com/2019/08/22/C-11常用特性/index.html">
+<meta property="og:site_name" content="朝花夕拾">
+<meta property="og:description" content="智能指针 使用new和malloc申请的内存空间，没有被释放会造成内存泄漏，为了一劳永逸，提出了智能指针，自动回收内存。 智能指针将一个计数器与对象相关联，引用计数器跟踪该类有多少个对象共享同一个指针，计数器初始化为1，当减少至0的时候就删除指针。  常用指针简介 auto_ptr:不支持复制（拷贝构造）和赋值（=），但是赋值时却不会报错，有很多问题。 unique_ptr：在赋值和复制时会报错。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-22T05:25:31.808Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++11常用特性">
+<meta name="twitter:description" content="智能指针 使用new和malloc申请的内存空间，没有被释放会造成内存泄漏，为了一劳永逸，提出了智能指针，自动回收内存。 智能指针将一个计数器与对象相关联，引用计数器跟踪该类有多少个对象共享同一个指针，计数器初始化为1，当减少至0的时候就删除指针。  常用指针简介 auto_ptr:不支持复制（拷贝构造）和赋值（=），但是赋值时却不会报错，有很多问题。 unique_ptr：在赋值和复制时会报错。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/22/C-11常用特性/">
+
+
+
+
+
+  <title>C++11常用特性 | 朝花夕拾</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">朝花夕拾</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">我双手烤着生命之火取暖，火萎了，我也该走了</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/22/C-11常用特性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陆标">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/profile.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝花夕拾">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++11常用特性</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-22T13:23:44+08:00">
+                2019-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h2><ul>
+<li>使用new和malloc申请的内存空间，没有被释放会造成内存泄漏，为了一劳永逸，提出了智能指针，自动回收内存。</li>
+<li>智能指针将一个计数器与对象相关联，引用计数器跟踪该类有多少个对象共享同一个指针，计数器初始化为1，当减少至0的时候就删除指针。</li>
+</ul>
+<h4 id="常用指针简介"><a href="#常用指针简介" class="headerlink" title="常用指针简介"></a>常用指针简介</h4><ul>
+<li>auto_ptr:不支持复制（拷贝构造）和赋值（=），但是赋值时却不会报错，有很多问题。</li>
+<li>unique_ptr：在赋值和复制时会报错。是在要赋值使用std::move</li>
+<li>share_ptr：基于引用计数的指针，可以随意的赋值。但是循环引用时会出问题，要么手动打开环，要么使用weak_ptr。</li>
+<li>weak_ptr：弱引用，不计数，但是不保证指向的内存一定有效，使用前需要判定是否为空。</li>
+<li>选用：如果需要指向多个指向同一个对象的指针，应该选择share_ptr。如果程序不需要指向多个对象的指针，则可以使用unique_ptr。</li>
+</ul>
+<h2 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[capture](parameters) <span class="keyword">mutable</span> -&gt;<span class="keyword">return</span>-type&#123;statement&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>1.[capture]：捕捉列表。捕捉列表总是出现在Lambda函数的开始处。实际上，[]是Lambda引出符。编译器根据该引出符判断接下来的代码是否是Lambda函数。捕捉列表能够捕捉上下文中的变量以供Lambda函数使用;</p>
+</li>
+<li><p>2.(parameters)：参数列表。与普通函数的参数列表一致。如果不需要参数传递，则可以连同括号“()”一起省略;</p>
+</li>
+<li><p>3.mutable：mutable修饰符。默认情况下，Lambda函数总是一个const函数，mutable可以取消其常量性。在使用该修饰符时，参数列表不可省略（即使参数为空）;</p>
+</li>
+<li><p>4.-&gt;return-type：返回类型。用追踪返回类型形式声明函数的返回类型。我们可以在不需要返回值的时候也可以连同符号”-&gt;”一起省略。此外，在返回类型明确的情况下，也可以省略该部分，让编译器对返回类型进行推导;</p>
+</li>
+<li><p>5.{statement}：函数体。内容与普通函数一样，不过除了可以使用参数之外，还可以使用所有捕获的变量。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">auto</span> func = [=, &amp;b](<span class="keyword">int</span> c)-&gt;<span class="keyword">int</span> &#123;<span class="keyword">return</span> b += a + c;&#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>例子</strong></p>
+<ul>
+<li>1.[=,&amp;a,&amp;b]表示以引用传递的方式捕捉变量a和b，以值传递方式捕捉其它所有变量;</li>
+<li>2.[&amp;,a,this]表示以值传递的方式捕捉变量a和this，引用传递方式捕捉其它所有变量。</li>
+</ul>
+<h2 id="nullptr"><a href="#nullptr" class="headerlink" title="nullptr"></a>nullptr</h2><ul>
+<li>在某种意义上来说，传统 C++ 会把 NULL、0 视为同一种东西，这取决于编译器如何定义 NULL，有些编译器会将 NULL 定义为 ((void*)0)，有些则会直接将其定义为 0。</li>
+<li>主要是为了替换NULL。</li>
+</ul>
+<h2 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h2><ul>
+<li>auto 在很早以前就已经进入了 C++，但是他始终作为一个存储类型的指示符存在。</li>
+<li>auto 不能用于函数传参。</li>
+</ul>
+<h2 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h2><ul>
+<li><p>decltype 关键字是为了解决 auto 关键字只能对变量进行类型推导的缺陷而出现的。它的用法和 sizeof 很相似：</p>
+<pre><code>decltype(表达式)</code></pre></li>
+</ul>
+<h2 id="区间迭代"><a href="#区间迭代" class="headerlink" title="区间迭代"></a>区间迭代</h2><ul>
+<li>C++11 引入了基于范围的迭代写法，我们拥有了能够写出像 Python 一样简洁的循环语句。 </li>
+<li>最常用的 std::vector 遍历将从原来的样子：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// &amp; 启用了引用</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;i : arr) &#123;    </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="初始化列表"><a href="#初始化列表" class="headerlink" title="初始化列表"></a>初始化列表</h2><ul>
+<li>C++11 提供了统一的语法来初始化任意的对象，例如：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">float</span> b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span> &#123;</span></span><br><span class="line"></span><br><span class="line">    B(<span class="keyword">int</span> _a, <span class="keyword">float</span> _b): a(_a), b(_b) &#123;&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">float</span> b;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="无序容器"><a href="#无序容器" class="headerlink" title="无序容器"></a>无序容器</h2><ul>
+<li><p>C++11 引入了两组无序容器： </p>
+<p>  std::unordered_map/std::unordered_multimap<br>  std::unordered_set/std::unordered_multiset。</p>
+</li>
+<li><p>无序容器中的元素是不进行排序的，内部通过 Hash 表实现，插入和搜索元素的平均复杂度为 O(constant)。</p>
+</li>
+<li><p>引用头文件(C++11)：#include <unordered_map></unordered_map></p>
+</li>
+<li><p>定义：unordered_map&lt;int,int&gt;、unordered_map&lt;string, double&gt; …</p>
+</li>
+<li><p>插入：例如将(“ABC” -&gt; 5.45) 插入unordered_map&lt;string, double&gt; hash中，hash[“ABC”]=5.45</p>
+</li>
+<li><p>查询：hash[“ABC”]会返回5.45</p>
+</li>
+<li><p>判断key是否存在：hash.count(“ABC”) != 0 或 hash.find(“ABC”) != hash.end()</p>
+</li>
+<li><p><a href="https://blog.csdn.net/jiange_zh/article/details/79356417" target="_blank" rel="noopener">参考链接1</a></p>
+</li>
+</ul>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><ul>
+<li><p>C++11 提供的正则表达式库操作 std::string 对象，对模式 std::regex (本质是 std::basic_regex)进行初始化，通过 std::regex_match 进行匹配，从而产生 std::smatch （本质是 std::match_results 对象）。</p>
+<h2 id="模板增强"><a href="#模板增强" class="headerlink" title="模板增强"></a>模板增强</h2><ul>
+<li>传统 C++ 中，模板只有在使用时才会被编译器实例化。只要在每个编译单元（文件）中编译的代码中遇到了被完整定义的模板，都会实例化。这就产生了重复实例化而导致的编译时间的增加。并且，我们没有办法通知编译器不要触发模板实例化。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/22/常用设计模式和六原则详解/" rel="next" title="常用设计模式和六原则详解">
+                <i class="fa fa-chevron-left"></i> 常用设计模式和六原则详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/profile.jpg" alt="陆标">
+            
+              <p class="site-author-name" itemprop="name">陆标</p>
+              <p class="site-description motion-element" itemprop="description">生命不止，奋斗不息</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/LuBiaoReal" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/hellowd123" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#智能指针"><span class="nav-number">1.</span> <span class="nav-text">智能指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用指针简介"><span class="nav-number">1.0.1.</span> <span class="nav-text">常用指针简介</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#Lambda表达式"><span class="nav-number">2.</span> <span class="nav-text">Lambda表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nullptr"><span class="nav-number">3.</span> <span class="nav-text">nullptr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#auto"><span class="nav-number">4.</span> <span class="nav-text">auto</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decltype"><span class="nav-number">5.</span> <span class="nav-text">decltype</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区间迭代"><span class="nav-number">6.</span> <span class="nav-text">区间迭代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化列表"><span class="nav-number">7.</span> <span class="nav-text">初始化列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无序容器"><span class="nav-number">8.</span> <span class="nav-text">无序容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式"><span class="nav-number">9.</span> <span class="nav-text">正则表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板增强"><span class="nav-number">10.</span> <span class="nav-text">模板增强</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。转载请注明出处！</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
